@@ -1,0 +1,258 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-xs-8">
+      <h4 class="page-title">Leave Request</h4>
+    </div>
+    <div class="col-xs-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded pull-right" (click)="addReset()"><i class="fa fa-plus"></i>
+        Add Leave</a>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-6 col-md-2 col-xs-6">
+      <div class="form-group form-focus">
+        <label class="control-label">Employee Name</label>
+        <input type="text" class="form-control floating" (input)="searchName($event.target.value)" />
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Leave Type</label>
+        <select class="select select-exp floating" (input)="searchType($event.target.value)">
+          <option value=""> -- Select -- </option>
+          <option value="Casual Leave">Casual Leave</option>
+          <option value="Medical Leave">Medical Leave</option>
+          <option value="Loss of Pay">Loss of Pay</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus" (input)="searchStatus($event.target.value)">
+        <label class="control-label">Leave Status</label>
+        <select class="select select-exp floating">
+          <option value=""> -- Select -- </option>
+          <option value="Pending"> Pending </option>
+          <option value="Approved"> Approved </option>
+          <option value="Rejected"> Rejected </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-2 col-xs-6">
+    <div class="form-group">
+      <my-date-picker name="mydate" placeholder="From" [options]="myDatePickerOptionsF" required></my-date-picker>
+    </div>
+    </div>
+    <div class="col-sm-6 col-md-2 col-xs-6">
+    <div class="form-group">
+      <my-date-picker name="mydate" placeholder="To" [options]="myDatePickerOptionsT" required></my-date-picker>
+    </div>
+    </div>
+    <div class="col-sm-6 col-md-2 col-xs-6">
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th style="width: 20%">
+                <mfDefaultSorter by="employeeName">Employee</mfDefaultSorter>
+              </th>
+              <th style="width: 20%">
+                <mfDefaultSorter by="type">Leave Type</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="from">From</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="to">To</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="days">No of Days</mfDefaultSorter>
+              </th>
+              <th style="width: 20%">
+                <mfDefaultSorter by="reason">Reason</mfDefaultSorter>
+              </th>
+              <th style="width: 30%" class="text-center">
+                <mfDefaultSorter by="status">Status</mfDefaultSorter>
+              </th>
+              <th style="width: 40%;text-align: right;">
+                <mfDefaultSorter by="Action">Action</mfDefaultSorter>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data;let i = index">
+              <td><a class="avatar">{{item.employeeName.split('')[0]}}</a>
+                <h2><a href="javascript:">{{item.employeeName}}<span>{{item.employeePos}}</span></a></h2>
+              </td>
+              <td>{{item.leaveType}}</td>
+              <td>{{item.from.formatted}}</td>
+              <td>{{item.to.formatted}}</td>
+              <td>{{item.days}} Days</td>
+              <td>{{item.reason}}</td>
+              <td class="text-center">
+                <div class="dropdown action-label">
+                  <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa fa-dot-circle-o text-purple"></i> {{item.status}} <i class="caret"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-purple"></i> New</a></li>
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-info"></i> Pending</a></li>
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Approved</a></li>
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Declined</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                      class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i>
+                        Edit</a></li>
+                    <li><a title="Decline" (click)="onDelete(item.leave_id)"><i class="fa fa-trash-o m-r-5"></i>
+                        Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_approve" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Decline Leave Request</h4>
+      </div>
+      <form>
+        <div class="modal-body card-box">
+          <p>Are you sure want to declined this leave request?</p>
+          <div class="m-t-20 text-left">
+            <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-danger">Decline</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="approve_leave" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Approve for Leave</h4>
+      </div>
+      <form>
+        <div class="modal-body card-box">
+          <p>Are you sure want to approve for this leave request?</p>
+          <div class="m-t-20 text-left">
+            <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-info">Approve</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="add_leave" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title m-l-15">Add Leave Request</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addLeave(addForm)" novalidate>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Employee Name <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" [(ngModel)]="addL.employeeName" name="employeeName" #employeeName="ngModel" required>
+              <input class="form-control" type="hidden" value="New" [(ngModel)]="addL.status" name="status" #status="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Employee Designation <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" [(ngModel)]="addL.employeePos" name="employeePos" #employeePos="ngModel"
+                required>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                <label>From <span class="text-danger">*</span></label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="addL.from" name="from" #from="ngModel"
+                  required></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>To <span class="text-danger">*</span></label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="addL.to" name="to" #to="ngModel" required></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label>Number of days <span class="text-danger">*</span></label>
+                  <input class="form-control" readonly type="text" [(ngModel)]="addL.days" name="days" #days="ngModel">
+                </div>
+              </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label>Remaining Leaves <span class="text-danger">*</span></label>
+                  <input class="form-control" readonly="" value="12" type="text">
+                </div>
+              </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Leave Type <span class="text-danger">*</span></label>
+              <select class="select form-control" [(ngModel)]="addL.leaveType" name="leaveType" #leaveType="ngModel"
+                required>
+                <option value="" selected="selected" disabled>Select Leave Type</option>
+                <option value="Casual Leave">Casual Leave</option>
+                <option value="Medical Leave">Medical Leave</option>
+                <option value="Loss of Pay">Loss of Pay</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                <label>Leave Reason <span class="text-danger">*</span></label>
+                <textarea rows="4" cols="5" class="form-control" [(ngModel)]="addL.reason" name="reason" #reason="ngModel"
+                  required></textarea>
+              </div>
+            </div>
+         
+          <div class="col-md-12">
+          <div class="m-t-20 text-center">
+            <div *ngIf="addLeaveValidation" class="alert alert-info m-t-10">
+              <strong>Warning!</strong> Must Fill all Mandatory Fields.
+            </div>
+            <button class="btn btn-primary" type="submit">Send Leave Request</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

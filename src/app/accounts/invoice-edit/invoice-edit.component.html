@@ -1,0 +1,185 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+          <h4 class="page-title">Edit Invoice</h4>
+        </div>
+    </div>
+          <div class="row m-t-20">
+            <div class="col-md-12">
+              <form #uptForm="ngForm" (ngSubmit)="updateInvoice(uptForm)" novalidate>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Client <span class="text-danger">*</span></label>
+                      <select class="select form-control" [(ngModel)]="uptV.client" name="client" #client="ngModel" required>
+                        <option value="" selected="selected" disabled>Please Select</option>
+                        <option value="Barry Cuda">Barry Cuda</option>
+                        <option value="Tressa Wexler">Tressa Wexler</option>
+                      </select>
+                      <input class="form-control" type="hidden" [(ngModel)]="uptV.inv_number" name="inv_number" #inv_number="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Project <span class="text-danger">*</span></label>
+                      <select class="select form-control" [(ngModel)]="uptV.project" name="project" #project="ngModel" required>
+                        <option value="" selected="selected" disabled>Select Project</option>
+                        <option value="Food and Drinks">Food and Drinks</option>
+                        <option value="School Guru">School Guru</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                          <label class="control-label">Email <span class="text-danger m-l-5">*</span> <span class="help-block help-block-top" *ngIf="email.errors && email.touched">Email is invalid</span></label>
+                          <input class="form-control" type="email" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})" [(ngModel)]="uptV.email" name="email" #email="ngModel" required>
+                          
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Tax</label>
+                      <select class="select form-control" [(ngModel)]="uptV.tax_type" name="tax_type" #tax_type="ngModel">
+                        <option value="" selected="selected" disabled>Select Tax</option>
+                        <option value="VAT">VAT</option>
+                        <option value="GST">GST</option>
+                        <option Value="No Tax">No Tax</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Client Address</label>
+                      <textarea class="form-control" rows="3" [(ngModel)]="uptV.client_address" name="client_address"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Billing Address</label>
+                      <textarea class="form-control" rows="3" [(ngModel)]="uptV.billing_address" name="billing_address"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Estimate Date <span class="text-danger">*</span></label>
+                      <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="uptV.est_date" name="est_date" #est_date="ngModel"
+                        required></my-date-picker>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Expiry Date <span class="text-danger">*</span></label>
+                      <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="uptV.exp_date" name="exp_date" #exp_date="ngModel"
+                        required></my-date-picker>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive" [formGroup]="editForm">
+                      <table class="table table-hover table-white" formArrayName="fieldArray">
+                        <thead>
+                          <tr>
+                            <th style="width: 20px">#</th>
+                            <th class="col-sm-2">Item</th>
+                            <th class="col-md-6">Description</th>
+                            <th style="width:100px;">Unit Cost</th>
+                            <th style="width:80px;">Qty</th>
+                            <th>Amount</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody >
+                          <tr [formGroupName]="j" *ngFor="let field of editForm.controls.fieldArray['controls'] as result; index as j">
+                            <td><span>{{j + 1}}</span></td>
+                            <td>
+                              <input class="form-control" type="text" formControlName = "item" style="min-width:150px">
+                            </td>
+                            <td>
+                              <input class="form-control" type="text" formControlName = "description" style="min-width:150px">
+                            </td>
+                            <td>
+                              <input class="form-control unit-cost" style="width:100px" (input)="getQty(j)" formControlName = "unitcost" min=1 type="text" >
+                            </td>
+                            <td>
+                              <input class="form-control" (input)="getQty(j)" style="width:80px"  formControlName = "quantity" min=1 type="text" >
+                            </td>
+                            <td>
+                              <input class="form-control" readonly=""  style="width:120px" type="text" formControlName = "amount">
+                            </td>
+                            <td>
+                              <a *ngIf="j ===0 && result.length === 1" href="javascript:void(0)" class="text-danger font-18" title="Rest"
+                              (click)="resetItemValue(j);"><i class="fa fa-refresh"></i></a>
+                              <a *ngIf="j > 0" href="javascript:void(0)" class="text-danger font-18"
+                              title="Remove" (click)="removeItem(j);"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </td>
+                          </tr>
+                          
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="6">
+                              <div style="float:right;"><button type="button" class="btn btn-primary" title="Add" (click)="addItem();">Add Item</button></div>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover table-white">
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">Total</td>
+                            <td style="text-align: right; width: 230px">{{uptV.item_total}}<input class="form-control text-right"  [(ngModel)]="uptV.item_total" name="item_total" type="hidden"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="5" style="text-align: right">Tax</td>
+                            <td style="text-align: right;width: 230px">
+                              <input class="form-control text-right"  [(ngModel)]="uptV.item_tax" name="item_tax" readonly="" type="text">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="5" style="text-align: right">
+                              Discount %
+                            </td>
+                            <td style="text-align: right; width: 230px">
+                              <input class="form-control text-right unit-cost" (input)="getDis($event.target.value)" min=0 max=100 [(ngModel)]="uptV.item_discount" name="item_discount" type="text">
+                              
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="5" style="text-align: right; font-weight: bold">
+                              Grand Total
+                            </td>
+                            <td style="text-align: right; font-weight: bold; font-size: 16px;width: 230px">
+                              <input class="form-control text-right"  [(ngModel)]="uptV.grand_total" name="grand_total" type="hidden">
+                             {{uptV.grand_total}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Other Information</label>
+                          <textarea class="form-control" rows="4" [(ngModel)]="uptV.other_info" name="other_info"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="uptInvoiceValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+                <button class="btn btn-primary" type="submit">Save & Send</button> <button class="btn btn-primary m-l-5"
+                  type="submit">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+     

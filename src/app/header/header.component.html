@@ -1,0 +1,338 @@
+<div *ngIf="url != 'pages' && url != 'career'">
+<div class="header-main" *ngIf="url != 'pages'">
+    <div class="header-left">
+        <a routerLink="dashboard" class="logo">
+            <img src="assets/img/logo.png" width="40" height="40" alt="">
+        </a>
+    </div>
+    <a [ngClass]="[url === 'inbox'?'dsply-none':'', url === 'calls'?'dsply-none':'', url === 'settings'?'dsply-none':'', url === 'chat'?'dsply-none':'']" id="toggle_btn" href="javascript:void(0);"><i class="la la-bars"></i></a>
+    <div class="page-title-box pull-left">
+        <h3>Focus Technologies</h3>
+    </div>
+    <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
+    <ul class="nav navbar-nav navbar-right user-menu pull-right">
+        <li class="dropdown hidden-xs">
+            <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge bg-purple pull-right">3</span></a>
+            <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span>Notifications</span>
+                </div>
+                <div class="drop-scroll">
+                    <ul class="media-list">
+                        <li class="media notification-message">
+                            <a href="javascript:">
+                                <div class="media-left">
+                                    <span class="avatar">
+                                        <img alt="John Doe" src="assets/img/user.jpg" class="img-responsive img-circle">
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="m-0 noti-details"><span class="noti-title">John Doe</span> added new task
+                                        <span class="noti-title">Patient
+                                            appointment booking</span></p>
+                                    <p class="m-0"><span class="notification-time">4 mins ago</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media notification-message">
+                            <a href="javascript:">
+                                <div class="media-left">
+                                    <span class="avatar">V</span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="m-0 noti-details"><span class="noti-title">Tarah Shropshire</span>
+                                        changed the task name
+                                        <span class="noti-title">Appointment booking with payment gateway</span></p>
+                                    <p class="m-0"><span class="notification-time">6 mins ago</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media notification-message">
+                            <a href="javascript:">
+                                <div class="media-left">
+                                    <span class="avatar">L</span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="m-0 noti-details"><span class="noti-title">Misty Tison</span> added <span
+                                            class="noti-title">Domenic
+                                            Houston</span> and <span class="noti-title">Claire Mapes</span> to project
+                                        <span class="noti-title">Doctor
+                                            available module</span></p>
+                                    <p class="m-0"><span class="notification-time">8 mins ago</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media notification-message">
+                            <a href="javascript:">
+                                <div class="media-left">
+                                    <span class="avatar">G</span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="m-0 noti-details"><span class="noti-title">Rolland Webber</span>
+                                        completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+                                    <p class="m-0"><span class="notification-time">12 mins ago</span></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media notification-message">
+                            <a href="javascript:">
+                                <div class="media-left">
+                                    <span class="avatar">V</span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="m-0 noti-details"><span class="noti-title">Bernardo Galaviz</span> added
+                                        new task <span class="noti-title">Private chat module</span></p>
+                                    <p class="m-0"><span class="notification-time">2 days ago</span></p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="topnav-dropdown-footer">
+                    <a routerLink="activities">View all Notifications</a>
+                </div>
+            </div>
+        </li>
+        <li class="dropdown hidden-xs">
+            <a href="javascript:;" id="open_msg_box" class="hasnotifications"><i class="fa fa-comment-o"></i> <span
+                    class="badge bg-purple pull-right">8</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:" class="dropdown-toggle user-link" data-toggle="dropdown" title="Admin">
+                <span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                    <span class="status online"></span></span>
+                <span class="m-l-5">Admin</span>
+                <i class="caret m-l-5"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a routerLink="profile">My Profile</a></li>
+                <li><a routerLink="profile/edit">Edit Profile</a></li>
+                <li><a routerLink="settings">Settings</a></li>
+                <li><a routerLink="pages/login">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="dropdown mobile-user-menu pull-right">
+        <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+        <ul class="dropdown-menu pull-right">
+                <li><a routerLink="profile">My Profile</a></li>
+                <li><a routerLink="profile/edit">Edit Profile</a></li>
+                <li><a routerLink="settings">Settings</a></li>
+                <li><a routerLink="pages/login">Logout</a></li>
+        </ul>
+    </div>
+</div>
+<div class="notification-box">
+    <div class="msg-sidebar notifications msg-noti">
+        <div class="topnav-dropdown-header">
+            <span>Messages</span>
+        </div>
+        <div class="drop-scroll msg-list-scroll msg-list-wrap" slimScroll [options]="opts1">
+            <div class="div-list-box">
+                <ul class="list-box">
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">R</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Richard Miles </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item new-message">
+                                <div class="list-left">
+                                    <span class="avatar">J</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">John Doe</span>
+                                    <span class="message-time">1 Aug</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">T</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Tarah Shropshire </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">M</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Mike Litorus</span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">C</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Catherine Manseau </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">D</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Domenic Houston </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">B</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Buster Wigton </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">R</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Rolland Webber </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">C</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author"> Claire Mapes </span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">M</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Melita Faucher</span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">J</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Jeffery Lalor</span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">L</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Loren Gatlin</span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:">
+                            <div class="list-item">
+                                <div class="list-left">
+                                    <span class="avatar">T</span>
+                                </div>
+                                <div class="list-body">
+                                    <span class="message-author">Tarah Shropshire</span>
+                                    <span class="message-time">12:28 AM</span>
+                                    <div class="clearfix"></div>
+                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cover-bar1"></div>
+        </div>
+        <div class="topnav-dropdown-footer">
+            <a routerLink="chat">See all messages</a>
+        </div>
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,123 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-xs-6">
+      <h4 class="page-title">Taxes</h4>
+    </div>
+    <div class="col-sm-4 col-xs-6 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded" (click)="addTaxReset()"><i class="fa fa-plus"></i>
+        Add Tax</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+          <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                  <tr>
+                     <th style="width: 30%">
+                          <mfDefaultSorter by="tax_name">Tax Name</mfDefaultSorter>
+                      </th>
+                      <th style="width: 30%">
+                          <mfDefaultSorter by="tax_percentage">Tax Percentage</mfDefaultSorter>
+                      </th>
+                      <th style="width: 30%" class="text-center">
+                          <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                      </th>
+                      <th style="width: 5%" class="text-right">
+                          <mfDefaultSorter by="action">Action</mfDefaultSorter>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of mf.data; index as i">
+                      <td>{{item.tax_name}}</td>
+                      <td>{{item.tax_percentage}}%</td>
+                      <td  class="text-center">
+                          <div class="dropdown action-label">
+                              <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown" aria-expanded="false"><i
+                                  class="fa fa-dot-circle-o text-danger"></i> {{item.status}} <i class="caret"></i>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Active</a></li>
+                                <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a></li>
+                              </ul>
+                            </div>
+                      </td>
+                      <td class="text-right">
+                          <div class="dropdown">
+                              <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                              <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:" title="Edit" (click)="onEdit(item.tax_id);"><i class="fa fa-pencil m-r-5"></i>
+                                    Edit</a></li>
+                                <li><a href="javascript:" title="Delete" (click)="onDelete(item);"><i class="fa fa-trash-o m-r-5"></i>
+                                    Delete</a></li>
+                              </ul>
+                            </div>
+                      </td>
+                  </tr>
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <td colspan="12">
+                          <mfBootstrapPaginator></mfBootstrapPaginator>
+                      </td>
+                  </tr>
+              </tfoot>
+            </table>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_tax" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Tax</h4>
+      </div>
+      <div class="modal-body card-box">
+        <p>Are you sure want to delete this?</p>
+        <div class="m-t-20 text-left">
+          <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+          <button type="button" class="btn btn-danger m-l-5">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="add_tax" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Tax</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (submit)="addTax(addForm)">
+          <div class="form-group">
+            <label>Tax Name <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" [(ngModel)]="addT.tax_name" name="tax_name" #tax_name="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label>Tax Percentage (%) <span class="text-danger">*</span></label>
+            <input class="form-control unit-cost" type="text" min=0 [(ngModel)]="addT.tax_percentage" name="tax_percentage" #tax_percentage="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label>Status <span class="text-danger">*</span></label>
+            <select class="select form-control" [(ngModel)]="addT.status" name="status" #status="ngModel" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="m-t-20 text-center">
+              <div *ngIf="addTaxValidation" class="alert alert-info m-t-10">
+                  <strong>Warning!</strong> Must Fill all Mandatory Fields.
+              </div>
+            <button class="btn btn-primary" type="submit">Create Tax</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

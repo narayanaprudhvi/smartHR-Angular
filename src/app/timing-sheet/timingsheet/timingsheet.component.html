@@ -1,0 +1,179 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Timing Sheet</h4>
+    </div>
+    <div class="col-sm-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded" (click)="addReset()"><i class="fa fa-plus"></i>
+        Add Today Work</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+          <thead>
+            <tr>
+              <th style="width: 20%">
+                <mfDefaultSorter by="firstName">Employee</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="date">Date</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="project">Projects</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="hours_assigned">Assigned Hours</mfDefaultSorter>
+              </th>
+              <th style="width: 10%">
+                <mfDefaultSorter by="hours_remaining">Remaining Hours</mfDefaultSorter>
+              </th>
+              <th style="width: 30%" class="text-center">
+                <mfDefaultSorter by="description">Description</mfDefaultSorter>
+              </th>
+              <th class="text-right" style="width: 5%">
+                <mfDefaultSorter by="action">Action</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data">
+              <td>
+                <a href="javascript:" class="avatar">{{item.firstName.split('')[0]}}</a>
+                <h2><a href="javascript:">{{item.firstName}} {{item.lastName}} <span>{{item.designation}}</span></a></h2>
+              </td>
+              <td>{{item.date.formatted}}</td>
+              <td>{{item.project}}</td>
+              <td class="text-center">{{item.hours_assigned}}</td>
+              <td class="text-center">{{item.hours_remaining}}</td>
+              <td>{{item.description}}</td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                      class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i>
+                        Edit</a></li>
+                    <li><a href="javascript:" title="Delete" (click)="onDelete(item)"><i class="fa fa-trash-o m-r-5"></i>
+                        Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="delete_workdetail" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Work Details</h4>
+      </div>
+      <div class="modal-body card-box">
+        <p>Are you sure want to delete this?</p>
+        <div class="m-t-20"> <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="add_todaywork" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Today Work details</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (submit)="addSheet(addForm)">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                  <label>First Name <span class="text-danger">*</span></label>
+                  <input class="form-control" type="text" [(ngModel)]="addS.firstName" name="firstName"
+                  #firstName="ngModel" required>
+                </div>
+              
+              <div class="form-group col-sm-6">
+                <label>Last Name <span class="text-danger">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="addS.lastName" name="lastName"
+                  #lastName="ngModel" required>
+              </div>
+            </div>
+            <div class="form-group">
+                <label>Designation <span class="text-danger">*</span></label>
+                <select class="select form-control" [(ngModel)]="addS.designation" name="designation" #designation="ngModel" required>
+                  <option value="Android Developer">Android Developer</option>
+                  <option value="IOS Developer">IOS Developer</option>
+                  <option value="PHP Developer">PHP Developer</option>
+                </select>
+              </div>
+          <div class="form-group">
+            <label>Project <span class="text-danger">*</span></label>
+            <select class="select form-control" [(ngModel)]="addS.project" name="project" #project="ngModel" required>
+              <option value="Food and Drinks">Food and Drinks</option>
+              <option value="School Guru">School Guru</option>
+              <option value="Penabook">Penabook</option>
+              <option value="Harvey Clinic">Harvey Clinic</option>
+            </select>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <label>Deadline <span class="text-danger">*</span></label>
+              <my-date-picker [options]="myDatePickerOptions" placeholder="Date" [(ngModel)]="addS.deadline" name="deadline"
+                #deadline="ngModel" readonly required></my-date-picker>
+            </div>
+          
+          <div class="form-group col-sm-4">
+            <label>Total Hours <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" [(ngModel)]="addS.hours_assigned" name="hours_assigned"
+              #hours_assigned="ngModel" readonly required>
+          </div>
+          <div class="form-group col-sm-4">
+            <label>Remaining Hours <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" [(ngModel)]="addS.hours_remaining" name="hours_remaining" #hours_remaining="ngModel" readonly required>
+          </div>
+        </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Date <span class="text-danger">*</span></label>
+          <my-date-picker [options]="myDatePickerOptions" placeholder="Date" [(ngModel)]="addS.date" name="date" #date="ngModel"
+            readonly required></my-date-picker>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Hours <span class="text-danger">*</span></label>
+          <input class="form-control" type="text" [(ngModel)]="addS.hours_today" name="hours_today" #hours_today="ngModel" required >
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description <span class="text-danger">*</span></label>
+        <textarea rows="4" cols="5" class="form-control" [(ngModel)]="addS.description" name="description" #description="ngModel"
+          required></textarea>
+      </div>
+      <div class="m-t-20 text-center">
+        <div *ngIf="addSheetValidation" class="alert alert-info m-t-10">
+          <strong>Warning!</strong> Must Fill all Mandatory Fields.
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>

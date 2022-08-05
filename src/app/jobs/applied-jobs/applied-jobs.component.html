@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="page-title">Job Applicants</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive table-responsive-inherit">
+          <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <thead>
+              <tr>
+                <th style="width: 20%">
+                  <mfDefaultSorter by="name">Applicant Name</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
+                  <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
+                  <mfDefaultSorter by="phone">Phone</mfDefaultSorter>
+                </th>
+                <th style="width: 15%">
+                  <mfDefaultSorter by="apply_date">Apply Date</mfDefaultSorter>
+                </th>
+                <th style="width: 15%" class="text-center">
+                  <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                </th>
+                <th style="width: 15%" class="text-center">
+                  <mfDefaultSorter by="resume">Resume</mfDefaultSorter>
+                </th>
+                <th style="width: 5%;text-align: right;">
+                  <mfDefaultSorter by="action">Actions</mfDefaultSorter>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of mf.data">
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.apply_date.formatted}}</td>
+                <td class="text-center">
+                  <div class="dropdown action-label">
+                    <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown"
+                      aria-expanded="false">
+                      <i class="fa fa-dot-circle-o text-info"></i> {{item.status}} <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-info"></i> New</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Hired</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Rejected</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Interviewed</a></li>
+                    </ul>
+                  </div>
+                </td>
+                <td class="text-center"><a href="javascript:" class="btn btn-xs btn-primary"><i class="fa fa-download"></i> Download</a></td>
+                <td class="text-right">
+                  <div class="dropdown">
+                    <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="javascript:"><i class="fa fa-clock-o m-r-5"></i> Schedule Interview</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

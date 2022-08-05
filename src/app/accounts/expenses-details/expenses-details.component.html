@@ -1,0 +1,101 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <h4 class="modal-title">Edit Expense</h4>
+      </div>
+    </div>
+    <div class="row m-t-20">
+        <div class="col-md-12">
+        <form #uptForm="ngForm" (submit)="updateExpense(uptForm)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Item Name<span class="text-danger m-l-5">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="uptEx.item" name="item" #item="ngModel" required>
+                <input class="form-control" type="hidden" [(ngModel)]="uptEx.expenseID" name="expenseID" #expenseID="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchase From<span class="text-danger m-l-5">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="uptEx.purchase_from" name="purchase_from"
+                  #purchase_from="ngModel" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Purchase Date<span class="text-danger m-l-5">*</span></label>
+              <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="uptEx.purchase_date" name="purchase_date"
+                #purchase_date="ngModel" required></my-date-picker>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchased By<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="uptEx.purchased_by" name="purchased_by" #purchased_by="ngModel"
+                  required>
+                  <option value="Daniel Porter">Daniel Porter</option>
+                  <option value="Roger Dixon">Roger Dixon</option>
+                  <option value="Loren Catlin">Roger Dixon</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Amount<span class="text-danger m-l-5">*</span></label>
+                <input placeholder="$" class="form-control unit-cost" type="text" [(ngModel)]="uptEx.amount" name="amount"
+                  #amount="ngModel" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Paid By<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="uptEx.paid_by" name="paid_by" #paid_by="ngModel"
+                  required>
+                  <option value="Cash">Cash</option>
+                  <option value="Cheque">Cheque</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="uptEx.status" name="status" #status="ngModel" required>
+                  <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Attachments</label>
+                <input class="form-control" type="file">
+              </div>
+            </div>
+          </div>
+          <div class="attach-files">
+            <ul>
+              <li>
+                <img src="assets/img/user.jpg" alt="">
+                <a href="javascript:" class="fa fa-close file-remove"></a>
+              </li>
+              <li>
+                <img src="assets/img/user.jpg" alt="">
+                <a href="javascript:" class="fa fa-close file-remove"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="m-t-20 text-center">
+            <div *ngIf="uptExpenseValidation" class="alert alert-info m-t-10">
+              <strong>Warning!</strong> Must Fill all Mandatory Fields.
+            </div>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

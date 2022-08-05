@@ -1,0 +1,96 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Department</h4>
+    </div>
+    <div class="col-sm-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded" (click)="addReset()"><i class="fa fa-plus"></i>
+        Add New Department</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th style="width: 95%">
+                <mfDefaultSorter by="department">Department</mfDefaultSorter>
+              </th>
+              <th style="width: 5%;text-align: right;">
+                <mfDefaultSorter by="Action">Action</mfDefaultSorter>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data;let i = index">
+              <td>{{item.department}}</td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                      class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i
+                          class="fa fa-pencil m-r-5"></i>
+                        Edit</a></li>
+                    <li><a title="Delete" (click)="onDelete(item.department_id)"><i class="fa fa-trash-o m-r-5"></i>
+                        Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <mfBootstrapPaginator></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_department" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Department</h4>
+      </div>
+      <div class="modal-body card-box">
+        <p>Are you sure want to delete this?</p>
+        <div class="m-t-20 text-left">
+          <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="add_department" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Department</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addDepartment(addForm)" novalidate>
+          <div class="form-group">
+            <label>Department Name <span class="text-danger">*</span></label>
+            <input class="form-control" required type="text" [(ngModel)]="addD.department" name="department" #department="ngModel" required>
+          </div>
+          <div class="m-t-20 text-center">
+              <div *ngIf="addDepartmentValidation" class="alert alert-info m-t-10">
+                  <strong>Warning!</strong> Must Fill all Mandatory Fields.
+              </div>
+            <button class="btn btn-primary" type="submit">Create Department</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

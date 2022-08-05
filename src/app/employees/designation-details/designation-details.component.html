@@ -1,0 +1,35 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+          <h4 class="modal-title">Edit Designation</h4>
+        </div>
+      </div>
+      <div class="row m-t-10">
+        <div class="col-md-6 col-md-offset-3">
+          <form #uptForm="ngForm" (ngSubmit)="updateDesignation(uptForm)" novalidate>
+            <div class="form-group">
+              <label>Designation Name <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" [(ngModel)]="uptD.designation" name="designation" required>
+              <input type="hidden" [(ngModel)]="uptD.designation_id" name="designation_id" #designation_id="ngModel">
+            </div>
+            <div class="form-group">
+              <label>Departments <span class="text-danger">*</span></label>
+              <select class="select floating form-control" [(ngModel)]="uptD.department" name="department">
+                <option value="Web Development">Web Development</option>
+                <option value="IT Management">IT Management</option>
+                <option value="Support Management">Support Management</option>
+                <option value="Application Development">Application Development</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="uptDesignationValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary" type="submit">Save Designation</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

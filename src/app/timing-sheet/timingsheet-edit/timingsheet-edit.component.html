@@ -1,0 +1,46 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+          <h4 class="modal-title">Edit Work Details</h4>
+        </div>
+      </div>
+        <div class="row m-t-20">
+        <div class="col-md-6 col-md-offset-3">
+          <form #uptForm="ngForm" (submit)="updateSheet(uptForm)">
+            <div class="form-group">
+              <label>Project <span class="text-danger">*</span></label>
+              <input class="form-control" type="hidden" [(ngModel)]="uptS.sheet_id" name="sheet_id" #sheet_id="ngModel" required>
+              <select class="select form-control" [(ngModel)]="uptS.project" name="project" #project="ngModel" required>
+                <option value="Food and Drinks">Food and Drinks</option>
+                <option value="School Guru">School Guru</option>
+                <option value="Penabook">Penabook</option>
+                <option value="Harvey Clinic">Harvey Clinic</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label>Date <span class="text-danger">*</span></label>
+                <my-date-picker [options]="myDatePickerOptions" placeholder="Date" [(ngModel)]="uptS.date" name="date" #date="ngModel" readonly
+                  required></my-date-picker>
+              </div>
+              <div class="form-group col-sm-6">
+                <label>Hours <span class="text-danger">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="uptS.hours_today" name="hours_today" #hours_today="ngModel" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="text-danger">*</span></label>
+              <textarea rows="4" cols="5" class="form-control" [(ngModel)]="uptS.description" name="description" #description="ngModel" required></textarea>
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="uptSheetValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ </div>

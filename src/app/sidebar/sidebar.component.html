@@ -1,0 +1,324 @@
+<div class="sidebar" id="sidebar" *ngIf="url != 'pages' && url != 'career'">
+        <div class="sidebar-inner slimscroll-wrap" slimScroll [options]="opts">
+          <div id="sidebar-menu" class="sidebar-menu">
+            <ul *ngIf="homeView">
+              <li [ngClass]="[url === 'dashboard'? 'active' : 'inactive',url === ''? 'active' : 'inactive']">
+                <a routerLink="dashboard"><i class="la la-dashboard"></i> <span> Dashboard </span></a>
+              </li>
+              <li class="submenu">
+                <a class="noti-dot" [ngClass]="url === 'employees'? 'subdrop' : 'null'"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'employees'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="employees/all-employees" [ngClass]="url2 === 'all-employees'? 'active' : 'null'">All Employees</a></li>
+                  <li><a routerLink="employees/holidays" [ngClass]="url2 === 'holidays'? 'active' : 'null'">Holidays</a></li>
+                  <li><a routerLink="employees/leaves" [ngClass]="url2 === 'leaves'? 'active' : 'null'"><span>Leave Requests</span> <span class="badge bg-primary pull-right">1</span></a></li>
+                  <li><a routerLink="employees/attendance" [ngClass]="url2 === 'attendance'? 'active' : 'null'">Attendance</a></li>
+                  <li><a routerLink="employees/departments" [ngClass]="url2 === 'departments'? 'active' : 'null'">Departments</a></li>
+                  <li><a routerLink="employees/designations" [ngClass]="url2 === 'designations'? 'active' : 'null'">Designations</a></li>
+                </ul>
+              </li>
+              <li [ngClass]="url === 'clients'? 'active' : 'null'">
+                <a routerLink="clients"><i class="la la-users"></i> <span> Clients </span></a> 
+              </li>
+              <li [ngClass]="url === 'projects'? 'active' : 'null'">
+                <a routerLink="projects"><i class="la la-rocket"></i> <span> Projects </span> </a>
+              </li>
+              <li [ngClass]="url === 'tasks'? 'active' : 'null'">
+                <a routerLink="tasks"><i class="la la-tasks"></i> <span> Tasks </span></a>
+              </li>
+              <li class="submenu">
+                <a [ngClass]="url === 'calls'? 'subdrop' : 'null'" style="cursor:pointer;"><i class="la la-phone"></i> <span> Calls</span><span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'calls'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="calls/voice-call" [ngClass]="url2 === 'voice-call'? 'active' : 'null'">Voice Call</a></li>
+                  <li><a routerLink="calls/video-call" [ngClass]="url2 === 'video-call'? 'active' : 'null'">Video Call</a></li>
+                </ul>
+              </li>
+              <li [ngClass]="url === 'contacts'? 'active' : 'null'">
+                <a routerLink="contacts"><i class="la la-book"></i> <span> Contacts </span></a>
+              </li>
+              <li [ngClass]="url === 'leads'? 'active' : 'null'">
+                <a routerLink="leads"><i class="la la-user-secret"></i> <span> Leads </span></a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:" [ngClass]="url === 'accounts'? 'subdrop' : 'null'"><i class="la la-files-o"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'accounts'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="accounts/estimates" [ngClass]="url2 === 'estimates' ? 'active' : 'null'">Estimates</a></li>
+                  <li><a routerLink="accounts/invoices" [ngClass]="url2 === 'invoices' ? 'active' : 'null'">Invoices</a></li>
+                  <li><a routerLink="accounts/payments" [ngClass]="url2 === 'payments'? 'active' : 'null'">Payments</a></li>
+                  <li><a routerLink="accounts/expenses" [ngClass]="url2 === 'expenses'? 'active' : 'null'">Expenses</a></li>
+                  <li><a routerLink="accounts/provident-fund" [ngClass]="url2 === 'provident-fund'? 'active' : 'null'">Provident Fund</a></li>
+                  <li><a routerLink="accounts/taxes" [ngClass]="url2 === 'taxes'? 'active' : 'null'">Taxes</a></li>
+                </ul>
+              </li>
+              <li class="submenu">
+                <a href="javascript:" [ngClass]="url === 'payroll'? 'subdrop' : 'null'"><i class="la la-money"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'payroll'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="payroll/employee-salary" [ngClass]="url2 === 'employee-salary' ? 'active' : 'null'"> Employee Salary </a></li>
+                  <li><a routerLink="payroll/payslip" [ngClass]="url2 === 'payslip' ? 'active' : 'null'"> Payslip </a></li>
+                </ul>
+              </li>
+              <li [ngClass]="url === 'timing-sheet'? 'active' : 'null'">
+                <a routerLink="timing-sheet"><i class="la la-clock-o"></i> <span> Timing Sheet </span></a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:" [ngClass]="url === 'jobs'? 'subdrop' : 'null'"><i class="la la-building"></i> <span> Jobs </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'jobs'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="jobs/managed-jobs" [ngClass]="url2 === 'managed-jobs' ? 'active' : 'null'"> Managed Jobs </a></li>
+                  <li><a routerLink="jobs/applied-jobs" [ngClass]="url2 === 'applied-jobs' ? 'active' : 'null'"> Applied Jobs </a></li>
+                </ul>
+              </li>
+              <li [ngClass]="url === 'tickets'? 'active' : 'null'">
+                <a routerLink="tickets"><i class="la la-ticket"></i> <span> Tickets </span></a>
+              </li>
+              <li [ngClass]="url === 'events'? 'active' : 'null'">
+                <a routerLink="events"><i class="la la-calendar"></i> <span> Events </span></a>
+              </li>
+              <li>
+                <a routerLink="inbox"><i class="la la-at"></i> <span> Email </span> </a>
+              </li>
+              <li [ngClass]="url === 'chat'? 'active' : 'null'">
+                <a routerLink="chat"><i class="la la-comments"></i> <span> Chat </span> <span class="badge bg-primary pull-right">5</span></a>
+              </li>
+              <li [ngClass]="url === 'assets'? 'active' : 'null'">
+                <a routerLink="assets"><i class="la la-object-ungroup"></i> <span> Assets </span></a>
+              </li>
+              <li [ngClass]="url === 'activities'? 'active' : 'null'">
+                <a routerLink="activities"><i class="la la-bell"></i> <span> Activities </span></a>
+              </li>
+              <li [ngClass]="url === 'users'? 'active' : 'null'">
+                <a routerLink="users"><i class="la la-user-plus"></i> <span> Users </span></a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:" [ngClass]="url === 'reports'? 'subdrop' : 'null'"><i class="la la-pie-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'reports'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="reports/expense-reports" [ngClass]="url2 === 'expense-reports' ? 'active' : 'null'"> Expense Report </a></li>
+                  <li><a routerLink="reports/invoice-reports" [ngClass]="url2 === 'invoice-reports' ? 'active' : 'null'"> Invoice Report </a></li>
+                </ul>
+              </li>
+              <li>
+                <a routerLink="settings/company-settings"><i class="la la-cog"></i> <span> Settings </span></a>
+              </li>
+              <li class="submenu">
+                <a href="javascript:" [ngClass]="url === 'pages'? 'subdrop' : 'null'"><i class="la la-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled" [ngClass]="url === 'pages'? 'submenu-block' : 'dsply-none'">
+                  <li><a routerLink="pages/login" [ngClass]="url2 === 'login' ? 'active' : 'null'"> Login </a></li>
+                  <li><a routerLink="pages/register" [ngClass]="url2 === 'register' ? 'active' : 'null'"> Register </a></li>
+                  <li><a routerLink="pages/forgot-password" [ngClass]="url2 === 'forgot-password' ? 'active' : 'null'"> Forgot Password </a></li>
+                  <li><a routerLink="profile" [ngClass]="url2 === 'profile' ? 'active' : 'null'"> Profile </a></li>
+                </ul>
+              </li>
+              <li class="submenu">
+                  <a href="javascript:void(0);"><i class="la la-share-alt"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
+                  <ul style="display: none;">
+                    <li class="submenu">
+                      <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                      <ul style="display: none;">
+                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
+                        <li class="submenu">
+                          <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
+                          <ul style="display: none;">
+                            <li><a href="javascript:void(0);">Level 3</a></li>
+                            <li><a href="javascript:void(0);">Level 3</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);"> <span>Level 1</span></a>
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+            <ul *ngIf='settingsView' class="sidebar-menu">
+                  <li> 
+                    <a routerLink="dashboard"><i class="la la-home"></i> <span>Back to Home</span></a>
+                  </li>
+                  <li class="menu-title">Settings</li>
+                  <li [ngClass]="url2 === 'company-settings' ? 'active' : 'null'"><a routerLink="settings/company-settings"> Company Settings </a></li>
+                  <li [ngClass]="url2 === 'localization' ? 'active' : 'null'"><a routerLink="settings/localization" > Localization </a></li>
+                  <li [ngClass]="url2 === 'theme-settings' ? 'active' : 'null'"><a routerLink="settings/theme-settings"> Theme Settings </a></li>
+                  <li [ngClass]="url2 === 'roles-permissions' ? 'active' : 'null'"><a routerLink="settings/roles-permissions"> Roles and Permissions </a></li>
+                  <li [ngClass]="url2 === 'email-settings' ? 'active' : 'null'"><a routerLink="settings/email-settings"> Email Settings </a></li>
+                  <li [ngClass]="url2 === 'invoive-settings' ? 'active' : 'null'"><a routerLink="settings/invoive-settings"> Invoice Settings </a></li>
+                  <li [ngClass]="url2 === 'salary-settings' ? 'active' : 'null'"><a routerLink="settings/salary-settings"> Salary Settings </a></li>
+                  <li [ngClass]="url2 === 'notifications' ? 'active' : 'null'"><a routerLink="settings/notifications"> Notifications </a></li>
+                  <li [ngClass]="url2 === 'change-password' ? 'active' : 'null'"><a routerLink="settings/change-password"> Change Password </a></li>
+                  <li [ngClass]="url2 === 'leave-type' ? 'active' : 'null'"><a routerLink="settings/leave-type"> Leave Type </a></li>
+            </ul>
+            <ul *ngIf='chatView' class="sidebar-menu">
+                  <li> 
+                    <a routerLink="dashboard"><i class="la la-home"></i> <span>Back to Home</span></a>
+                  </li>
+                  <li class="menu-title">Chat Groups <a href="#" data-toggle="modal" data-target="#add_group"><i class="fa fa-plus"></i></a></li>
+                  <li> 
+                    <a href="javascript:">#General</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">#Video Responsive Survey</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">#500rs</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">#warehouse</a>
+                  </li>
+                  <li class="menu-title">Direct Chats <a href="#" data-toggle="modal" data-target="#add_chat_user"><i class="fa fa-plus"></i></a></li>
+                  <li> 
+                    <a href="javascript:"><span class="status online"></span> John Doe <span class="badge bg-danger pull-right">1</span></a>
+                  </li>
+                  <li> 
+                    <a href="javascript:"><span class="status offline"></span> Richard Miles <span class="badge bg-danger pull-right">18</span></a>
+                  </li>
+                  <li> 
+                    <a href="javascript:"><span class="status away"></span> John Smith</a>
+                  </li>
+                  <li class="active"> 
+                    <a href="javascript:"><span class="status online"></span> Mike Litorus <span class="badge bg-danger pull-right">108</span></a>
+                  </li>
+            </ul>
+            <ul *ngIf='taskView' class="sidebar-menu">
+                <li> 
+                  <a routerLink="dashboard"><i class="la la-home"></i> <span>Back to Home</span></a>
+                </li>
+                <li class="menu-title">Projects <a href="javascript:" data-toggle="modal" data-target="#create_project"><i class="fa fa-plus"></i></a></li>
+                <li> 
+                  <a href="javascript:">School Guru</a>
+                </li>
+                <li class="active"> 
+                  <a href="javascript:">Harvey Clinic</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Penabook</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Food and Drinks</a>
+                </li>
+              </ul>
+            <ul *ngIf='callView' class="sidebar-menu">
+                <li> 
+                  <a routerLink="dashboard"><i class="la la-home"></i> <span>Back to Home</span></a>
+                </li>
+                <li class="menu-title">Chat Groups <a href="#" data-toggle="modal" data-target="#add_group"><i class="fa fa-plus"></i></a></li>
+                <li> 
+                  <a href="javascript:">#General</a>
+                </li>
+                <li> 
+                  <a href="javascript:">#Video Responsive Survey</a>
+                </li>
+                <li> 
+                  <a href="javascript:">#500rs</a>
+                </li>
+                <li> 
+                  <a href="javascript:">#warehouse</a>
+                </li>
+                <li class="menu-title">Direct Chats <a href="#" data-toggle="modal" data-target="#add_chat_user"><i class="fa fa-plus"></i></a></li>
+                <li> 
+                  <a href="javascript:"><span class="status online"></span> John Doe <span class="badge bg-danger pull-right">1</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:"><span class="status offline"></span> Richard Miles <span class="badge bg-danger pull-right">18</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:"><span class="status away"></span> John Smith</a>
+                </li>
+                <li class="active"> 
+                  <a href="javascript:"><span class="status online"></span> Mike Litorus <span class="badge bg-danger pull-right">108</span></a>
+                </li>
+          </ul>
+            <ul *ngIf='mailView' class="sidebar-menu">
+                <li> 
+                    <a routerLink="dashboard"><i class="la la-home"></i> <span>Back to Home</span></a>
+                  </li>
+                  <li class="menu-title"><a routerLink="inbox/compose" class="btn btn-primary btn-block">Compose</a></li>
+                  <li class="active"> 
+                    <a href="javascript:">Inbox <span class="mail-count">(21)</span></a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">Starred</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">Sent Mail</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">Trash</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:">Draft <span class="mail-count">(8)</span></a>
+                  </li>
+                  <li class="menu-title">Label <a href="javascript:"><i class="fa fa-plus"></i></a></li>
+                  <li> 
+                    <a href="javascript:"><i class="fa fa-circle text-success mail-label"></i> Work</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:"><i class="fa fa-circle text-danger mail-label"></i> Office</a>
+                  </li>
+                  <li> 
+                    <a href="javascript:"><i class="fa fa-circle text-warning mail-label"></i> Personal</a>
+                  </li>
+            </ul>
+            <ul *ngIf='composeView' class="sidebar-menu">
+                <li> 
+                  <a routerLink="inbox"><i class="la la-home"></i> <span>Back to Inbox</span></a>
+                </li>
+                <li> 
+                  <a routerLink="inbox">Inbox <span class="mail-count">(21)</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:">Starred</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Sent Mail</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Draft <span class="mail-count">(8)</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:">Trash</a>
+                </li>
+                <li class="menu-title">Label <a href="javascript:"><i class="fa fa-plus"></i></a></li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-success mail-label"></i> Work</a>
+                </li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-danger mail-label"></i> Office</a>
+                </li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-warning mail-label"></i> Personal</a>
+                </li>
+              </ul>
+              <ul *ngIf='messageView' class="sidebar-menu">
+                <li> 
+                  <a routerLink="inbox"><i class="la la-home"></i> <span>Back to Inbox</span></a>
+                </li>
+                <li> 
+                  <a routerLink="inbox">Inbox <span class="mail-count">(21)</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:">Starred</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Sent Mail</a>
+                </li>
+                <li> 
+                  <a href="javascript:">Draft <span class="mail-count">(8)</span></a>
+                </li>
+                <li> 
+                  <a href="javascript:">Trash</a>
+                </li>
+                <li class="menu-title">Label <a href="javascript:"><i class="fa fa-plus"></i></a></li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-success mail-label"></i> Work</a>
+                </li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-danger mail-label"></i> Office</a>
+                </li>
+                <li> 
+                  <a href="javascript:"><i class="fa fa-circle text-warning mail-label"></i> Personal</a>
+                </li>
+              </ul>
+          </div>
+          <div class="cover-bar"></div>
+        </div>
+      </div>
+      
+      

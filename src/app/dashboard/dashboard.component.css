@@ -1,0 +1,40 @@
+.content {
+  margin-top: 100px;
+  margin-left: 250px;
+}
+.first-row img,
+.second-row img {
+  border-radius: 40%;
+  cursor: pointer;
+}
+.first-row h5,
+.second-row h5 {
+  margin-top: 20px;
+}
+.icon-section {
+  text-align: center;
+}
+.second-row {
+  margin-top: 30px;
+}
+@media screen and (max-width: 600px) {
+  .content {
+    align-items: center;
+    margin-left: 135px;
+    display: flex;
+  }
+  .second-row {
+    margin: 0px 0px 0px 25px;
+  }
+}
+@media (device-width: 280px) {
+  .content {
+    margin-left: 20px;
+  }
+}
+@media (min-width: 768px) and (max-width: 836px) {
+  .content {
+    align-items: center;
+    display: block;
+  }
+}

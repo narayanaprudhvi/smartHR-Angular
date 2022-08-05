@@ -1,0 +1,90 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Holidays 2017</h4>
+    </div>
+    <div class="col-sm-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded" (click)="addReset()"><i class="fa fa-plus"></i>
+        Add New Holiday</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table m-b-0">
+          <thead>
+            <tr>
+              <th width="30%">Title </th>
+              <th width="30%">Holiday Date</th>
+              <th width="30%">Day</th>
+              <th class="text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rows;let i = index" class="holiday-{{item.status}}">
+              <td>{{item.title}}</td>
+              <td>{{item.date.formatted}}</td>
+              <td>{{item.day}}</td>
+              <td class="text-right">
+                  <div class="dropdown" *ngIf="item.status == 'upcoming'">
+                      <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                      <ul class="dropdown-menu pull-right">
+                        <li><a title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i> Edit</a></li>
+                        <li><a title="Delete" (click)="onDelete(item.holiday_id)"><i class="fa fa-trash-o m-r-5"></i> Delete</a></li>
+                      </ul>
+                  </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="delete_holiday" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content modal-md">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Holiday</h4>
+        </div>
+        <form>
+          <div class="modal-body card-box">
+            <p>Are you sure want to delete this?</p>
+            <div class="m-t-20 text-left">
+              <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="add_holiday" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-content modal-md">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Holiday</h4>
+        </div>
+        <div class="modal-body">
+          <form  #addForm="ngForm" (ngSubmit)="addHoliday(addForm)" novalidate>
+            <div class="form-group">
+              <label>Holiday Name <span class="text-danger">*</span></label>
+              <input class="form-control" required type="text"  [(ngModel)]="addD.title" name="title" #title="ngModel" required>
+            </div>
+            <div class="form-group">
+              <label>Holiday Date <span class="text-danger">*</span></label>
+              <my-date-picker [options]="myDatePickerOptions"  [(ngModel)]="addD.date" name="date" #date="ngModel" required></my-date-picker>
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="addHolidayValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary">Create Holiday</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

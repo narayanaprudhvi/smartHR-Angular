@@ -1,0 +1,363 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-xs-8">
+      <h4 class="page-title">Assets</h4>
+    </div>
+    <div class="col-xs-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded pull-right" (click)="addReset();"><i class="fa fa-plus"></i>
+        Add Asset</a>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-md-3 col-xs-6">
+      <div class="form-group form-focus">
+        <label class="control-label">Employee Name</label>
+        <input type="text" class="form-control floating" />
+      </div>
+    </div>
+    <div class="col-md-3 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Status</label>
+        <select class="select floating form-control">
+          <option value=""> -- Select -- </option>
+          <option value="0"> Pending </option>
+          <option value="1"> Approved </option>
+          <option value="2"> Returned </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xs-6">
+          <my-date-picker [options]="myDatePickerOptions" placeholder="Purchase Date"
+                  required></my-date-picker>
+             
+        </div>
+    <div class="col-md-2 col-lg-2 col-xs-6">
+          <my-date-picker [options]="myDatePickerOptions" placeholder="Warranty Date"
+                  required></my-date-picker>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xs-6">
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+          <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                <tr>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="asset_user">Asset User</mfDefaultSorter>
+                  </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="asset_name">Asset Name</mfDefaultSorter>
+                  </th>
+                  <th style="width: 10%">
+                      <mfDefaultSorter by="asset_id">Asset Id</mfDefaultSorter>
+                 </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="purchase_date">Purchase Date</mfDefaultSorter>
+                  </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="end_date">Warranty End</mfDefaultSorter>
+                  </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="amount">Amount</mfDefaultSorter>
+                  </th>
+                  <th style="width: 10%">
+                    <mfDefaultSorter by="action">Action</mfDefaultSorter>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of mf.data">
+              <td>{{item.asset_user}}</td>
+              <td>
+                <strong>{{item.asset_name}}</strong>
+              </td>
+              <td>#AST-{{item.asset_id}}</td>
+              <td>{{item.purchase_date.formatted}}</td>
+              <td>{{item.end_date.formatted}}</td>
+              <td>${{item.amount}}</td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i>
+                        Edit</a></li>
+                    <li><a href="javascript:" title="Delete" (click)="onDelete(item)"><i class="fa fa-trash-o m-r-5"></i>
+                        Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                <td colspan="12">
+                  <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_asset" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Asset</h4>
+      </div>
+      <form>
+        <div class="modal-body card-box">
+          <p>Are you sure want to delete this asset?</p>
+          <div class="m-t-20"> <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="add_asset" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Asset</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addAsset(addForm)" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset Name</label>
+                <input class="form-control" type="text" [(ngModel)]="addA.asset_name" name="asset_name" #asset_name="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset Id</label>
+                <input class="form-control" type="text" readonly [(ngModel)]="addA.asset_id" name="asset_id" #asset_id="ngModel">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchase Date</label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="addA.purchase_date" name="purchase_date" #purchase_date="ngModel" required></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Warranty End</label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="addA.end_date" name="end_date" #end_date="ngModel" required></my-date-picker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Manufacturer</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Model</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Serial Number</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Supplier</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Condition</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Warranty</label>
+                <input class="form-control" type="text" placeholder="In Months">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Value</label>
+                <input placeholder="$1800" class="form-control" type="text" [(ngModel)]="addA.amount" name="amount" #amount="ngModel" >
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset User</label>
+                <select class="select form-control"  [(ngModel)]="addA.asset_user" name="asset_user" #asset_user="ngModel" required>
+                  <option>John Doe</option>
+                  <option>Richard Miles</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="select form-control">
+                  <option>Pending</option>
+                  <option>Approved</option>
+                  <option>Deployed</option>
+                  <option>Damaged</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" type='submit'>Add Asset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="edit_asset" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Asset</h4>
+      </div>
+      <div class="modal-body">
+        <form #uptForm="ngForm" (ngSubmit)="updateAsset(uptForm)" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset Name</label>
+                <input class="form-control" type="text" [(ngModel)]="uptA.asset_name" name="asset_name" #asset_name="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset Id</label>
+                <input class="form-control" type="text" [(ngModel)]="uptA.asset_id" name="asset_id" #asset_id="ngModel" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchase Date</label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="uptA.purchase_date" name="purchase_date" #purchase_date="ngModel" required></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Warranty End</label>
+                <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="uptA.end_date" name="end_date" #end_date="ngModel" required></my-date-picker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Manufacturer</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Model</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Serial Number</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Supplier</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Condition</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Warranty</label>
+                <input class="form-control" type="text" placeholder="In Months">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Value</label>
+                <input placeholder="$1800" class="form-control" type="text" [(ngModel)]="uptA.amount" name="amount" #amount="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Asset User</label>
+                <select class="select form-control" [(ngModel)]="uptA.asset_user" name="asset_user" #asset_user="ngModel">
+                  <option>John Doe</option>
+                  <option>Richard Miles</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="select form-control">
+                  <option>Pending</option>
+                  <option>Approved</option>
+                  <option>Deployed</option>
+                  <option>Damaged</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" type='submit'>Save & Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

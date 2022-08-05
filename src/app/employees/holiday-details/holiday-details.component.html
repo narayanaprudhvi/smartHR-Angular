@@ -1,0 +1,29 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h4 class="modal-title">Edit Holiday</h4>
+      </div>
+    </div>
+    <div class="row m-t-20">
+      <div class="col-md-6 col-md-offset-3">
+        <form  #uptForm="ngForm" (ngSubmit)="updateHoliday(uptForm)" novalidate>
+          <div class="form-group">
+            <label>Holiday Name <span class="text-danger">*</span></label>
+            <input class="form-control" required type="text" [(ngModel)]="uptD.title" name="title" #title="ngModel" required>
+            <input type="hidden" [(ngModel)]="uptD.holiday_id" name="holiday_id" #holiday_id="ngModel">
+            <input type="hidden" [(ngModel)]="uptD.status" name="status" #status="ngModel">
+          </div>
+          <div class="form-group">
+            <label>Holiday Date <span class="text-danger">*</span></label>
+            <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="uptD.date" name="date" #date="ngModel" required></my-date-picker>
+          </div>
+          <div class="m-t-20 text-center">
+              <div *ngIf="uptHolidayValidation" class="alert alert-info m-t-10">
+                  <strong>Warning!</strong> Must Fill all Mandatory Fields.
+              </div>
+            <button class="btn btn-primary" type="submit">Save Holiday</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

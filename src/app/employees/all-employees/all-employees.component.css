@@ -1,0 +1,11 @@
+.select-designation{
+    padding: 10px 0px 0px 7px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.popmodal{
+    position:relative;
+    background:#fff;
+    margin:auto;
+}

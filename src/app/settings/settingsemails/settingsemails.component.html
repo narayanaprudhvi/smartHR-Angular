@@ -1,0 +1,79 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="form-group">
+        <label class="radio-inline">
+          <input type="radio" name="php_mail"> PHP Mail
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="smtp_mail"> SMTP
+        </label>
+      </div>
+      <h4 class="page-title">PHP Email Settings</h4>
+      <form>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Email From Address</label>
+              <input class="form-control" type="email">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Emails From Name</label>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </form>
+      <h4 class="page-title m-t-30">SMTP Email Settings</h4>
+      <form>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP HOST</label>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP USER</label>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP PASSWORD</label>
+              <input class="form-control" type="password">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP PORT</label>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP Security</label>
+              <select class="select form-control">
+                <option>None</option>
+                <option>SSL</option>
+                <option>TLS</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>SMTP Authentication Domain</label>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 m-t-20 text-center">
+          <button type="button" class="btn btn-primary">Save &amp; update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

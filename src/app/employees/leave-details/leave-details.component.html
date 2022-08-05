@@ -1,0 +1,83 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-xs-8">
+      <h4 class="modal-title">Edit Leave</h4>
+    </div>
+  </div>
+  <div class="row m-t-20 m-b-30">
+    <form #uptForm="ngForm" (ngSubmit)="updateLeave(uptForm)" novalidate>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Employee Name <span class="text-danger">*</span></label>
+          <input class="form-control" type="text" [(ngModel)]="uptL.employeeName" name="employeeName" #employeeName="ngModel"
+            required>
+          <input class="form-control" type="hidden" [(ngModel)]="uptL.leave_id" name="leave_id" #leave_id="ngModel"
+            required>
+          <input class="form-control" type="hidden" [(ngModel)]="uptL.status" name="status" #status="ngModel" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Employee Designation <span class="text-danger">*</span></label>
+          <input class="form-control" type="text" [(ngModel)]="uptL.employeePos" name="employeePos" #employeePos="ngModel"
+            required>
+          <input type="hidden" [(ngModel)]="uptL.id" name="id">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Leave Type <span class="text-danger">*</span></label>
+          <select class="select form-control" [(ngModel)]="uptL.leaveType" name="leaveType" #leaveType="ngModel"
+            required>
+            <option value="" selected="selected" disabled>Select Leave Type</option>
+            <option value="Casual Leave">Casual Leave</option>
+            <option value="Medical Leave">Medical Leave</option>
+            <option value="Loss of Pay">Loss of Pay</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Remaining Leaves <span class="text-danger">*</span></label>
+          <input class="form-control" readonly="" value="12" type="text">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>From <span class="text-danger">*</span></label>
+          <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="uptL.from" name="from" #from="ngModel" required></my-date-picker>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>To <span class="text-danger">*</span></label>
+          <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="uptL.to" name="to" #to="ngModel" required></my-date-picker>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Number of days <span class="text-danger">*</span></label>
+          <input class="form-control" readonly="" type="text" [(ngModel)]="uptL.days" name="days" #days="ngModel"
+            required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Leave Reason <span class="text-danger">*</span></label>
+          <textarea rows="4" cols="5" class="form-control" [(ngModel)]="uptL.reason" name="reason" #reason="ngModel"
+            required></textarea>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="m-t-20 text-center">
+          <div *ngIf="uptLeaveValidation" class="alert alert-info m-t-10">
+            <strong>Warning!</strong> Must Fill all Mandatory Fields.
+          </div>
+          <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

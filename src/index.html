@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SmartHR</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+
+    <app-root>
+        <style>
+            /*-----------------
+            Loader
+        -----------------------*/
+
+            #loader-wrapper {
+                background-color: #fff;
+                bottom: 0;
+                height: 100%;
+                left: 0;
+                position: fixed;
+                right: 0;
+                top: 0;
+                width: 100%;
+                z-index: 9999;
+            }
+
+            #loader {
+                background-position: center center;
+                background-repeat: no-repeat;
+                height: 200px;
+                left: 50%;
+                margin: -100px 0 0 -100px;
+                position: absolute;
+                top: 50%;
+                width: 200px;
+            }
+
+            .loader-ellips {
+                font-size: 20px;
+                position: relative;
+                width: 64px;
+                margin: 100px auto 0;
+            }
+
+            .loader-ellips__dot {
+                display: block;
+                width: 1em;
+                height: 1em;
+                border-radius: 0.5em;
+                position: absolute;
+                animation-duration: 0.5s;
+                animation-timing-function: ease;
+                animation-iteration-count: infinite;
+            }
+
+            .loader-ellips__dot:nth-child(1),
+            .loader-ellips__dot:nth-child(2) {
+                left: 0;
+            }
+
+            .loader-ellips__dot:nth-child(3) {
+                left: 1.5em;
+            }
+
+            .loader-ellips__dot:nth-child(4) {
+                left: 3em;
+            }
+
+            .loader-ellips__dot:nth-child(1) {
+                animation-name: reveal;
+            }
+
+            .loader-ellips__dot:nth-child(2),
+            .loader-ellips__dot:nth-child(3) {
+                animation-name: slide;
+            }
+
+            .loader-ellips__dot:nth-child(4) {
+                animation-name: reveal;
+                animation-direction: reverse;
+            }
+
+            @keyframes reveal {
+                from {
+                    transform: scale(0.001);
+                }
+
+                to {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes slide {
+                to {
+                    transform: translateX(1.5em)
+                }
+            }
+
+            .loader-ellips__dot:nth-child(1) {
+                background: #404040;
+            }
+
+            .loader-ellips__dot:nth-child(2) {
+                background: #ff9b44;
+            }
+
+            .loader-ellips__dot:nth-child(3) {
+                background: #404040;
+            }
+
+            .loader-ellips__dot:nth-child(4) {
+                background: #404040;
+            }
+        </style>
+
+        <!-- Loader -->
+        <div id="loader-wrapper">
+            <div id="loader">
+                <div class="loader-ellips">
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                </div>
+            </div>
+        </div>
+    </app-root>
+
+</body>
+
+</html>

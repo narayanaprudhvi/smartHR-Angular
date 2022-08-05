@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-8">
+          <h4 class="modal-title">Edit Ticket</h4>
+        </div>
+    </div>
+    <div class="row m-t-20">
+        <div class="col-md-12">
+          <form #uptForm="ngForm" (ngSubmit)="updateTicket(uptForm)" novalidate>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Ticket Subject</label>
+                  <input class="form-control" type="text" [(ngModel)]="editT.subject" name="subject" #subject="ngModel">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Ticket Id</label>
+                  <input class="form-control" type="text" readonly [(ngModel)]="editT.ticket_id" name="ticket_id" #ticket_id="ngModel">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Assign Staff</label>
+                    <select class="select form-control" [(ngModel)]="editT.assign_staff" name="assign_staff" #assign_staff="ngModel">
+                      <option value="Mike Litorous">Mike Litorus</option>
+                      <option value="John Smith">John Smith</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Priority</label>
+                      <select class="select form-control" [(ngModel)]="editT.priority" name="priority" #priority="ngModel">
+                        <option value="Highest">Highest</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea class="form-control" [(ngModel)]="editT.description" name="description" #description="ngModel"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Upload Files</label>
+                  <input class="form-control" type="file">
+                </div>
+              </div>
+            </div>
+            <div class="m-t-20 text-center">
+              <button class="btn btn-primary" type="submit">Edit Ticket</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ </div>

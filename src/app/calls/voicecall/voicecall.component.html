@@ -1,0 +1,119 @@
+<div class="page-wrapper">
+    <div class="chat-main-row">
+        <div class="chat-main-wrapper">
+            <div class="col-xs-9 message-view task-view">
+                <div class="chat-window">
+                    <div class="chat-header">
+                        <div class="navbar">
+                            <div class="user-details">
+                                <div class="pull-left user-img m-r-10">
+                                    <a href="javascript:" title="Mike Litorus"><img src="assets/img/user.jpg" alt=""
+                                            class="w-40 img-circle"><span class="status online"></span></a>
+                                </div>
+                                <div class="user-info pull-left">
+                                    <a href="javascript:" title="Mike Litorus"><span class="font-bold">Mike Litorus</span></a>
+                                    <span class="last-seen">Online</span>
+                                </div>
+                            </div>
+                            <ul class="nav navbar-nav pull-right m-l-10 chat-menu">
+                                <li>
+                                    <a (click)="chatSidebar=true" href="javascript:" class="task-chat profile-rightbar pull-right"><i
+                                            class="fa fa-comments" aria-hidden="true"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                                            class="fa fa-cog"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0)">Settings</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+
+                        </div>
+                    </div>
+
+                    <div class="chat-contents">
+                        <div class="chat-content-wrap">
+                            <div *ngIf="onCall">
+                                <div class="voice-call-avatar">
+                                    <img src="assets/img/user-03.jpg" alt="" class="call-avatar">
+                                    <span class="username">John Doe</span>
+                                    <span class="call-timing-count">00:59</span>
+                                </div>
+                                <div class="call-users">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:">
+                                                <img src="assets/img/user-04.jpg" class="img-responsive" alt="">
+                                                <span class="call-mute"><i class="fa fa-microphone-slash" aria-hidden="true"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">
+                                                <img src="assets/img/user-05.jpg" class="img-responsive" alt="">
+                                                <span class="call-mute"><i class="fa fa-microphone-slash" aria-hidden="true"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">
+                                                <img src="assets/img/user-06.jpg" class="img-responsive" alt="">
+                                                <span class="call-mute"><i class="fa fa-microphone-slash" aria-hidden="true"></i></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-footer">
+                        <div class="call-icons">
+                            <div *ngIf="onCall">
+                                <ul class="call-items">
+                                    <li class="call-item">
+                                        <a href="javascript:" title="Enable Video" tooltip="Enable Video">
+                                            <i class="fa fa-video-camera camera" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="call-item">
+                                        <a href="javascript:" title="Mute" tooltip="Mute">
+                                            <i class="fa fa-microphone microphone" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="call-item">
+                                        <a href="javascript:" title="Add User" tooltip="Add User">
+                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="end-call">
+                                    <a href="javascript:void(0);">End Call</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!onCall">
+                            <div class="profile-widget">
+                                <div class="profile-img">
+                                    <a href="javascript:" class="avatar"><img src="assets/img/user-03.jpg" alt=""></a>
+                                </div>
+                                <h4 class="user-name m-t-10 m-b-0 text-ellipsis"><a href="javascript:">Tressa Wexler</a></h4>
+                                <div class="small text-muted">calling ...</div>
+                                <div class="incoming-btns">
+                                    <a class="btn btn-success m-r-10">Decline</a>
+                                    <a class="btn btn-danger" (click)="callAccept()">Answer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div [ngClass]="chatSidebar == true ? 'opened' : 'null'" class="col-xs-3 message-view chat-profile-view chat-sidebar"
+                id="chat_sidebar">
+                <app-chat-sidebar></app-chat-sidebar>
+            </div>
+        </div>
+   
+</div>
+<div (click)="chatSidebar=false" [ngClass]="chatSidebar == true ? 'opened' : 'null'" class="task-overlay" data-reff=""></div>
+</div>

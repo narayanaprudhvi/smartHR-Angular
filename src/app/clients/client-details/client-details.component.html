@@ -1,0 +1,227 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h4 class="modal-title">Edit Client</h4>
+    </div>
+  </div>
+  <div class="row m-b-30 m-t-20">
+    <div class="col-md-12">
+      <form #uptForm="ngForm" (ngSubmit)="updateClient(uptForm)" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">First Name <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" [(ngModel)]="uptC.firstName" name="firstName" #firstName="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Last Name</label>
+              <input class="form-control" type="text" [(ngModel)]="uptC.lastName" name="lastName" #lastName="ngModel">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Contact Person <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" [(ngModel)]="uptC.contactPerson" name="contactPerson" #contactPerson="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                  <label class="control-label">Email <span class="text-danger m-l-5">*</span></label>
+                  <input class="form-control" type="email" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})" [(ngModel)]="uptC.email" name="email" #email="ngModel" required>
+                  <span class="help-block" *ngIf="email.errors && email.touched">
+                    Email is invalid
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Password <span class="text-danger">*</span></label>
+              <input class="form-control" type="password" [(ngModel)]="uptC.password" name="password" #password="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Confirm Password <span class="text-danger">*</span></label>
+              <input class="form-control" type="password" [(ngModel)]="uptC.cPassword" name="cPassword" #cPassword="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Client ID <span class="text-danger">*</span></label>
+              <input class="form-control floating" type="text" [(ngModel)]="uptC.clientID" name="clientID" #clientID="ngModel" readonly required>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group" [class.has-error]="mobile.invalid && mobile.touched" [class.has-success]="mobile.valid">
+                  <label class="control-label">Phone <span class="text-danger">*</span></label>
+                  <input class="form-control unit-cost" type="text" [(ngModel)]="uptC.mobile" name="mobile" #mobile="ngModel" pattern="(\d{10}|\d{12})" required>
+                  <span class="help-block" *ngIf="mobile.errors && mobile.touched">
+                    Phone Number is invalid
+                  </span>
+                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Company Name</label>
+              <input class="form-control" type="text" [(ngModel)]="uptC.companyName" name="companyName" #companyName="ngModel">
+              <input type="hidden" [(ngModel)]="uptC.status" name="status">
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive m-t-15">
+          <table class="table table-striped custom-table">
+            <thead>
+              <tr>
+                <th>Module Permission</th>
+                <th class="text-center">Read</th>
+                <th class="text-center">Write</th>
+                <th class="text-center">Create</th>
+                <th class="text-center">Delete</th>
+                <th class="text-center">Import</th>
+                <th class="text-center">Export</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Projects</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+              <tr>
+                <td>Tasks</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+              <tr>
+                <td>Chat</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+              <tr>
+                <td>Estimates</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+              <tr>
+                <td>Invoices</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+              <tr>
+                <td>Timing Sheets</td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+                <td class="text-center">
+                  <input checked="" type="checkbox">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="m-t-20 text-center">
+            <div *ngIf="uptClientValidation" class="alert alert-info m-t-10">
+                <strong>Warning!</strong> Must Fill all Mandatory Fields.
+            </div>
+          <button class="btn btn-primary" type="submit">Update Client</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

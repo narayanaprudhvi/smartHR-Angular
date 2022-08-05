@@ -1,0 +1,51 @@
+<div class="main-wrapper">
+<div class="header-main">
+  <div class="header-left">
+    <a href="javascript:" class="logo">
+      <img src="assets/img/logo.png" width="40" height="40" alt="">
+    </a>
+  </div>
+  <div class="page-title-box pull-left">
+    <h3>Focus Technologies</h3>
+  </div>
+  <ul class="nav navbar-nav navbar-right user-menu pull-right">
+    <li>
+      <a routerLink="../../pages/login">Login</a>
+    </li>
+    <li>
+      <a routerLink="../../pages/register">Register</a>
+    </li>
+  </ul>
+</div>
+<div class="page-wrapper job-wrapper">
+  <div class="content container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="page-title">Jobs</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let item of rows">
+        <a class="job-list" routerLink="../job-details">
+          <div class="job-list-det">
+            <div class="job-list-desc">
+              <h3 class="job-list-title">{{item.job_title}}</h3>
+              <h4 class="job-department">{{item.designation}}</h4>
+            </div>
+            <div class="job-type-info">
+              <span class="job-types">{{item.job_type}}</span>
+            </div>
+          </div>
+          <div class="job-list-footer">
+            <ul>
+              <li><i class="fa fa-map-signs"></i> California</li>
+              <li><i class="fa fa-money"></i> $35000-$38000</li>
+              <li><i class="fa fa-clock-o"></i> 2 days ago</li>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

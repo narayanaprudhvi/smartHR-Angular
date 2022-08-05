@@ -1,0 +1,229 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-xs-6">
+      <h4 class="page-title">Expenses</h4>
+    </div>
+    <div class="col-sm-4 col-xs-6 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded pull-right" data-toggle="modal" data-target="#add_expense"><i
+          class="fa fa-plus"></i>
+        Add Expense</a>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus">
+        <label class="control-label">Item Name</label>
+        <input type="text" class="form-control floating" (input)="searchItem($event.target.value)" />
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Purchased By</label>
+        <select class="select floating form-control" (input)="searchPurBy($event.target.value)">
+          <option value="" selected="selected" disabled> -- Select -- </option>
+          <option value="">None</option>
+          <option value="Loren Gatlin">Loren Gatlin</option>
+          <option value="Tarah Shropshire">Tarah Shropshire</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Paid By</label>
+        <select class="select floating form-control" (input)="searchPaidBy($event.target.value)">
+          <option value="" selected="selected" disabled> -- Select -- </option>
+          <option value="">None</option>
+          <option value="Cash"> Cash </option>
+          <option value="Cheque"> Cheque </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <my-date-picker [options]="myDatePickerOptions" placeholder="From"
+        ></my-date-picker>
+
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <my-date-picker [options]="myDatePickerOptions" placeholder="To"></my-date-picker>
+
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table m-b-0 datatable">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Purchase From</th>
+              <th>Purchase Date</th>
+              <th>Purchased By</th>
+              <th>Amount</th>
+              <th>Paid By</th>
+              <th class="text-center">Status</th>
+              <th class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let field of rows; index as i">
+              <td>
+                <strong>{{field.item}}</strong>
+              </td>
+              <td>{{field.purchase_from}}</td>
+              <td>{{field.purchase_date.formatted}}</td>
+              <td>{{field.purchased_by}}</td>
+              <td>${{field.amount}}</td>
+              <td>{{field.paid_by}}</td>
+              <td class="text-center">
+                <div class="dropdown action-label">
+                  <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-dot-circle-o text-danger"></i> {{field.status}} <i class="caret"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Pending</a></li>
+                    <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Approved</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                      class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" title="Edit" (click)="onEdit(field);"><i class="fa fa-pencil m-r-5"></i>
+                        Edit</a></li>
+                    <li><a href="javascript:" title="Delete" (click)="onDelete(field);"><i class="fa fa-trash-o m-r-5"></i>
+                        Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_expense" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Expense</h4>
+      </div>
+      <div class="modal-body card-box">
+        <p>Are you sure want to delete this expense?</p>
+        <div class="m-t-20 text-left">
+          <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add_expense" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Expense</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (submit)="addExpense(addForm)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Item Name<span class="text-danger m-l-5">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="addEx.item" name="item" #item="ngModel" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchase From<span class="text-danger m-l-5">*</span></label>
+                <input class="form-control" type="text" [(ngModel)]="addEx.purchase_from" name="purchase_from"
+                  #purchase_from="ngModel" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Purchase Date<span class="text-danger m-l-5">*</span></label>
+              <my-date-picker [options]="myDatePickerOptions1" [(ngModel)]="addEx.purchase_date" name="purchase_date"
+                #purchase_date="ngModel" required></my-date-picker>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Purchased By<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="addEx.purchased_by" name="purchased_by" #purchased_by="ngModel"
+                  required>
+                  <option value="Daniel Porter">Daniel Porter</option>
+                  <option value="Roger Dixon">Roger Dixon</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Amount<span class="text-danger m-l-5">*</span></label>
+                <input placeholder="$" class="form-control unit-cost" type="text" [(ngModel)]="addEx.amount" name="amount"
+                  #amount="ngModel" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Paid By<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="addEx.paid_by" name="paid_by" #paid_by="ngModel"
+                  required>
+                  <option value="Cash">Cash</option>
+                  <option value="Cheque">Cheque</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status<span class="text-danger m-l-5">*</span></label>
+                <select class="select form-control" [(ngModel)]="addEx.status" name="status" #status="ngModel" required>
+                  <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Attachments</label>
+                <input class="form-control" type="file">
+              </div>
+            </div>
+          </div>
+          <div class="attach-files">
+            <ul>
+              <li>
+                <img src="assets/img/user.jpg" alt="">
+                <a href="javascript:" class="fa fa-close file-remove"></a>
+              </li>
+              <li>
+                <img src="assets/img/user.jpg" alt="">
+                <a href="javascript:" class="fa fa-close file-remove"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="m-t-20 text-center">
+            <div *ngIf="addExpenseValidation" class="alert alert-info m-t-10">
+              <strong>Warning!</strong> Must Fill all Mandatory Fields.
+            </div>
+            <button class="btn btn-primary" type="submit">Create Expense</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

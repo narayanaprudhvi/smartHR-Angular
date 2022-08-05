@@ -1,0 +1,91 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Invoice Report</h4>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Client</label>
+        <select class="select floating form-control">
+          <option value="">Select Client</option>
+          <option value="">Global Technologies</option>
+          <option value="1">Delta Infotech</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <my-date-picker [options]="myDatePickerOptions" placeholder="From" 
+        required></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <my-date-picker [options]="myDatePickerOptions" placeholder="To"
+        required></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <a href="#" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+          <table class="table table-striped custom-table m-b-0" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                <tr>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="inv_number">Invoice Number</mfDefaultSorter>
+                      </th>
+                      <th style="width: 15%">
+                        <mfDefaultSorter by="client">Client</mfDefaultSorter>
+                      </th>
+                      <th style="width: 15%">
+                        <mfDefaultSorter by="est_date">Created Date</mfDefaultSorter>
+                      </th>
+                      <th style="width: 15%">
+                        <mfDefaultSorter by="exp_date">Due Date</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%">
+                        <mfDefaultSorter by="grand_total">Amount</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%">
+                        <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                      </th>
+                      <th style="width: 5%;text-align:right;">
+                        <mfDefaultSorter by="actions">Actions</mfDefaultSorter>
+                      </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf.data;index as i">
+                  <td><a href="javascript:" (click)="onView(item.inv_number);">#INV-00{{item.inv_number}}</a></td>
+                  <td>{{item.client}}</td>
+                  <td>{{item.est_date.formatted}}</td>
+                  <td>{{item.exp_date.formatted}}</td>
+                  <td>{{item.grand_total}}</td>
+                  <td><span class="label" [ngClass]="[item.status == 'Paid' ? 'label-success-border' : '',item.status == 'Sent' ? 'label-info-border' : '', item.status == 'Partially Paid' ? 'label-warning-border' : '']">{{item.status}}</span></td>
+                  <td class="text-right">
+                    <div class="dropdown">
+                      <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                      <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:" (click)="onEdit(item);"><i class="fa fa-pencil m-r-5"></i> Edit</a></li>
+                        <li><a href="javascript:" (click)="onView(item.inv_number);"><i class="fa fa-eye m-r-5"></i> View</a></li>
+                        <li><a href="javascript:"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a></li>
+                        <li><a href="javascript:" (click)="onDelete(item.inv_number);"><i class="fa fa-trash-o m-r-5"></i> Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                  <tr>
+                    <td colspan="12">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

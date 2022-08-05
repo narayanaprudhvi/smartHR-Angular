@@ -1,0 +1,184 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Provident Fund</h4>
+    </div>
+    <div class="col-sm-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded" (click)="addFundReset()"><i class="fa fa-plus"></i>
+        Add Provident Fund</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+            <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                    <tr>
+                        <th style="width: 25%">
+                            <mfDefaultSorter by="employee_name">Employee Name</mfDefaultSorter>
+                        </th>
+                        <th style="width: 30%">
+                            <mfDefaultSorter by="fund_type">Provident Fund Type</mfDefaultSorter>
+                        </th>
+                        <th style="width: 20%">
+                            <mfDefaultSorter by="empoloyee_share">Employee Share</mfDefaultSorter>
+                        </th>
+                        <th style="width: 20%">
+                            <mfDefaultSorter by="organization_share">Organization share</mfDefaultSorter>
+                        </th>
+                        <!-- <th style="width: 20%">
+                            <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                        </th> -->
+                        <th style="width: 5%">
+                            <mfDefaultSorter by="action">Action</mfDefaultSorter>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of mf.data; index as i">
+                        <td>
+                            <a href="javascript:" class="avatar">J</a>
+                            <h2><a href="javascript:">{{item.employee_name}} <span> {{item.designation}}</span></a></h2>
+                        </td>
+                        <td>{{item.fund_type}}</td>
+                        <td>{{item.employee_share}}%</td>
+                        <td>{{item.organization_share}}%</td>
+                        <!-- <td>
+                          <div class="dropdown action-label">
+                            <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown" aria-expanded="false">
+                              <i class="fa fa-dot-circle-o text-danger"></i> {{item.status}} <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                              <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Pending</a></li>
+                              <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Approved</a></li>
+                            </ul>
+                          </div>
+                        </td> -->
+                        <td class="text-right">
+                            <div class="dropdown">
+                              <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                              <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i>
+                                    Edit</a></li>
+                                <li><a href="javascript:" title="Delete" (click)="onDelete(item)"><i class="fa fa-trash-o m-r-5"></i>
+                                    Delete</a></li>
+                              </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+              </table>
+       </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_pf" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Provident Fund</h4>
+      </div>
+      <div class="modal-body card-box">
+        <p>Are you sure want to delete this?</p>
+        <div class="m-t-20">
+          <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add_pf" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Provident Fund</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (submit)="addFund(addForm)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Employee Name<span class="text-danger m-l-5">*</span></label>
+                <select class="form-control select" [(ngModel)]="addPF.employee_name" name="employee_name" #employee_name="ngModel" required>
+                  <option value="" selected="selected" disabled>Select Employee</option>
+                  <option value="John Doe">John Doe (FT-0001)</option>
+                  <option value="Richard Miles">Richard Miles (FT-0002)</option>
+                </select>
+                
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Provident Fund Type<span class="text-danger m-l-5">*</span></label>
+                <select class="form-control select" [(ngModel)]="addPF.fund_type" name="fund_type" #fund_type="ngModel" required>
+                  <option value="" selected="selected" disabled>Select Fund Type</option>
+                  <option value="Fixed Amount">Fixed Amount</option>
+                  <option value="Percentage of Basic Salary">Percentage of Basic Salary</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="show-fixed-amount" style="display: block;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Share (Amount)</label>
+                      <input class="form-control unit-cost" type="text" [(ngModel)]="addPF.employee_amount" name="employee_amount" #employee_amount="ngModel">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Organization Share (Amount)</label>
+                      <input class="form-control unit-cost" type="text" [(ngModel)]="addPF.organization_amount" name="organization_amount" #organization_amount="ngModel">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="show-basic-salary">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Share (%)<span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="text" [(ngModel)]="addPF.employee_share" name="employee_share" #employee_share="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Organization Share (%)<span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="text" [(ngModel)]="addPF.organization_share" name="organization_share" #organization_share="ngModel" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" [(ngModel)]="addPF.description" name="description"  #description="ngModel"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+              <div *ngIf="addFundValidation" class="alert alert-info m-t-10">
+                  <strong>Warning!</strong> Must Fill all Mandatory Fields.
+              </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

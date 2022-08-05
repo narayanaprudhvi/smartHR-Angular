@@ -1,0 +1,23 @@
+.content{
+    padding-top: 60px;
+}
+
+.number-contact{
+    color:#ff9b44;
+    font-size:15px;
+}
+
+.checkbox-status{
+    height:20px;
+    width:20px;
+}
+
+.status-span{
+    position: absolute;
+    margin-top: -35px;
+    margin-left: 24px;
+}
+
+.page-wrapper {
+    min-height:650px;
+}

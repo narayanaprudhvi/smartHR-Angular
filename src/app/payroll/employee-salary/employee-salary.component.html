@@ -1,0 +1,264 @@
+
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-xs-4">
+      <h4 class="page-title">Employee Salary</h4>
+    </div>
+    <div class="col-xs-8 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded pull-right" (click)="addSalaryReset()"><i class="fa fa-plus"></i>
+        Add Salary</a>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus">
+        <label class="control-label">Employee Name</label>
+        <input type="text" class="form-control floating" (input)="searchName($event.target.value)"/>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Role</label>
+        <select class="select floating form-control" (input)="searchRole($event.target.value)">
+          <option value=""> -- Select -- </option>
+          <option value="Employer">Employer</option>
+          <option value="Manager">Manager</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Leave Status</label>
+        <select class="select floating form-control" (input)="searchStatus($event.target.value)">
+          <option value=""> -- Select -- </option>
+          <option value="Pending"> Pending </option>
+          <option value="Approved"> Approved </option>
+          <option value="Rejected"> Rejected </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+        <my-date-picker [options]="myDatePickerOptions" placeholder="From"
+        ></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+        <my-date-picker [options]="myDatePickerOptions" placeholder="To" 
+        ></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-md-2 col-xs-6">
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+          <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                  <tr>
+                      <th style="width: 40%">
+                          <mfDefaultSorter by="employee_name">Employee</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%">
+                          <mfDefaultSorter by="employee_id">Employee ID</mfDefaultSorter>
+                      </th>
+                      <th style="width: 20%">
+                          <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%">
+                          <mfDefaultSorter by="joining_date">Joining Date</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%" class="text-center">
+                          <mfDefaultSorter by="role">Role</mfDefaultSorter>
+                      </th>
+                      <th style="width: 10%" class="text-center">
+                          <mfDefaultSorter by="netSalary">Salary</mfDefaultSorter>
+                      </th>
+                      <th style="width: 30%" class="text-center">
+                          <mfDefaultSorter by="payslip">Payslip</mfDefaultSorter>
+                      </th>
+                      <th style="width: 5%">
+                          <mfDefaultSorter by="action">Action</mfDefaultSorter>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of mf.data">
+                      <td><a (click)="onView(item.employee_id);"><a href="javascript:" class="avatar">{{item.employee_name.split('')[0]}}</a>
+                        <h2><a href="javascript:">{{item.employee_name}}<span>{{item.designation}}</span></a></h2></a>
+                      </td>
+                      <td>FT-{{item.employee_id}}</td>
+                      <td>{{item.email}}</td>
+                      <td>{{item.joining_date.formatted | date: 'd MMM y'}}</td>
+                      <td class="text-center">
+                          <div class="dropdown">
+                              <a class="btn btn-white btn-sm rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                {{item.role}} <i class="caret"></i></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="javascript:">Employer</a></li>
+                                <li><a href="javascript:">Manager</a></li>
+                              </ul>
+                            </div>
+                      </td>
+                      <td class="text-center"><span>${{item.netSalary | number:'0.1-2'}}</span></td>
+                      <td class="text-center"><a class="btn btn-xs btn-primary" href="javascript:" (click)="payslip(item.employee_id)">Generate Slip</a></td>
+                      <td class="text-right">
+                          <div class="dropdown">
+                              <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                              <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:" (click)="onEdit(item.employee_id)" title="Edit"><i class="fa fa-pencil m-r-5"></i>
+                                    Edit</a></li>
+                                <li><a href="javascript:" (click)="onDelete(item)" title="Delete"><i class="fa fa-trash-o m-r-5"></i>
+                                    Delete</a></li>
+                              </ul>
+                            </div>
+                      </td>
+                  </tr>
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <td colspan="12">
+                          <mfBootstrapPaginator></mfBootstrapPaginator>
+                      </td>
+                  </tr>
+              </tfoot>
+          </table>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add_salary" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-content modal-lg">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Staff Salary</h4>
+        </div>
+        <div class="modal-body">
+          <form #addForm="ngForm" (submit)="addSalary(addForm)">
+            <div class="row"> 
+              <div class="col-md-6"> 
+                <div class="form-group">
+                  <label>Select Staff<span class="text-danger m-l-5">*</span></label>
+                  <select class="select form-control" [(ngModel)]="addE.employee_name" name="employee_name" #employee_name="ngModel" required> 
+                    <option value="John Doe">John Doe</option>
+                    <option value="Richard Miles">Richard Miles</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6"> 
+                <label>Net Salary</label>
+                <input class="form-control" type="text" min=0 [(ngModel)]="addE.netSalary" name="netSalary" #netSalary="ngModel" readonly>
+                
+                <input class="form-control" type="hidden" [(ngModel)]="addE.role" name="role" #role="ngModel">
+                <input class="form-control" type="hidden" [(ngModel)]="addE.email" name="email" #email="ngModel">
+                
+                <input class="form-control" type="hidden" min=0 [(ngModel)]="addE.earnings_total" name="earnings_total" #earnings_total="ngModel">
+                <input class="form-control" type="hidden" min=0 [(ngModel)]="addE.deduction_total" name="deduction_total" #deduction_total="ngModel">
+              </div>
+            </div>
+            <div class="row"> 
+              <div class="col-md-6"> 
+                <h4 class="text-primary">Earnings</h4>
+                  <div class="form-group">
+                    <label>Basic<span class="text-danger m-l-5">*</span></label>
+                    <input class="form-control unit-cost" type="text" (input)="onNetAdd($event.target.value)" min=0 [(ngModel)]="addE.earnings_basic" name="earnings_basic" #earnings_basic="ngModel" required>
+                  </div>
+                  <div class="form-group">
+                    <label>DA(7%)</label>
+                    <input class="form-control unit-cost" type="text" min=0 [(ngModel)]="addE.earnings_DA" name="earnings_DA" #earnings_DA="ngModel" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>HRA(10%)</label>
+                    <input class="form-control unit-cost" type="text" min=0 [(ngModel)]="addE.earnings_HRA" name="earnings_HRA" #earnings_HRA="ngModel" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Conveyance</label>
+                    <input class="form-control unit-cost" type="text" (input)="onNetAdd($event.target.value)" min=0 [(ngModel)]="addE.earnings_conveyance" name="earnings_conveyance" #earnings_conveyance="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Allowance</label>
+                    <input class="form-control unit-cost" type="text" (input)="onNetAdd($event.target.value)" min=0 [(ngModel)]="addE.earnings_allowance" name="earnings_allowance" #earnings_allowance="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Medical Allowance</label>
+                    <input class="form-control unit-cost" type="text" (input)="onNetAdd($event.target.value)" min=0 [(ngModel)]="addE.earnings_mallowance" name="earnings_mallowance" #earnings_mallowance="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Others</label>
+                    <input class="form-control unit-cost" type="text" (input)="onNetAdd($event.target.value)" min=0 [(ngModel)]="addE.earnings_others" name="earnings_others" #earnings_others="ngModel">
+                  </div> 
+              </div> 
+              <div class="col-md-6">  
+                <h4 class="text-primary">Deductions</h4>
+                <div class="form-group">
+                    <label>TDS (max upto 20%)</label>
+                    <input class="form-control" type="text" min=0 max=20 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_TDS" name="deduction_TDS" #deduction_TDS="ngModel">
+                  </div> 
+                  <div class="form-group">
+                    <label>ESI</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_ESI" name="deduction_ESI" #deduction_ESI="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>PF</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_PF" name="deduction_PF" #deduction_PF="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Leave</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_leave" name="deduction_leave" #deduction_leave="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Prof. Tax (%)</label>
+                    <input class="form-control" type="text" min=0 max=20 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_tax" name="deduction_tax" #deduction_tax="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Labour Welfare</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_welfare" name="deduction_welfare" #deduction_welfare="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Fund</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_fund" name="deduction_fund" #deduction_fund="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Loan</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_loan" name="deduction_loan" #deduction_loan="ngModel">
+                  </div>
+                  <div class="form-group">
+                    <label>Others</label>
+                    <input class="form-control unit-cost" type="text" min=0 (input)="onNetAdd($event.target.value)" [(ngModel)]="addE.deduction_others" name="deduction_others" #deduction_others="ngModel">
+                  </div>
+              </div>
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="addSalaryValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary" type="submit">Create Salary</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="delete_salary" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content modal-md">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Salary</h4>
+        </div>
+        <form>
+          <div class="modal-body card-box">
+            <p>Are you sure want to delete this?</p>
+            <div class="m-t-20 text-left">
+              <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

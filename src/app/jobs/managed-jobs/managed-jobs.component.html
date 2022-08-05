@@ -1,0 +1,373 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-xs-8">
+        <h4 class="page-title">Jobs</h4>
+      </div>
+      <div class="col-xs-4 text-right m-b-30">
+        <a href="javascript:" class="btn btn-primary rounded pull-right" data-toggle="modal" data-target="#add_job"><i
+            class="fa fa-plus"></i>
+          Add New Job</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive table-responsive-inherit">
+          <table class="table table-striped custom-table" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <thead>
+              <tr>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="job_id">Job Id</mfDefaultSorter>
+                </th>
+                <th style="width: 15%">
+                  <mfDefaultSorter by="job_title">Job Title</mfDefaultSorter>
+                </th>
+                <th style="width: 15%">
+                  <mfDefaultSorter by="department">Department</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="expiry_Date">Expiry Date</mfDefaultSorter>
+                </th>
+                <th style="width: 10%" class="text-center">
+                  <mfDefaultSorter by="job_type">Job Type</mfDefaultSorter>
+                </th>
+                <th style="width: 10%" class="text-center">
+                  <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                </th>
+                <th style="width: 10%" class="text-center">
+                  <mfDefaultSorter by="applicants">Applicants</mfDefaultSorter>
+                </th>
+                <th style="width: 5%;text-align: right;">
+                  <mfDefaultSorter by="action">Actions</mfDefaultSorter>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of mf.data">
+                <td>J-0{{item.job_id}}</td>
+                <td><a href="javascript:">{{item.job_title}}</a></td>
+                <td>{{item.department}}</td>
+                <td>{{item.expiry_date.formatted}}</td>
+                <td class="text-center">
+                  <div class="dropdown action-label">
+                    <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown"
+                      aria-expanded="false">
+                      <i class="fa fa-dot-circle-o text-danger"></i> {{item.job_type}} <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Part Time</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Internship</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-warning"></i> Temporary</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-warning"></i> Other</a></li>
+                    </ul>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <div class="dropdown action-label">
+                    <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown"
+                      aria-expanded="false">
+                      <i class="fa fa-dot-circle-o text-danger"></i> {{item.status}} <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-info"></i> Open</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Closed</a></li>
+                      <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Cancelled</a></li>
+                    </ul>
+                  </div>
+                </td>
+                <td class="text-center"><a routerLink="../applied-jobs" class="btn btn-xs btn-primary">3 Candidates</a></td>
+                <td class="text-right">
+                  <div class="dropdown">
+                    <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="javascript:" title="Edit" (click)="onEdit(item)"><i class="fa fa-pencil m-r-5"></i>
+                          Edit</a></li>
+                      <li><a href="javascript:" title="Delete" (click)="onDelete(item)"><i class="fa fa-trash-o m-r-5"></i>
+                          Delete</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="delete_job" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Job</h4>
+      </div>
+      <form>
+        <div class="modal-body card-box">
+          <p>Are you sure want to delete this job?</p>
+          <div class="m-t-20"> <a href="javascript:" class="btn btn-default" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="add_job" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Job</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm='ngForm' (ngSubmit)='addJob(addForm)'>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Title</label>
+                <input class="form-control" type="text" name="job_title" [(ngModel)]="addJ.job_title" #job_title="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Department</label>
+                <select class="select form-control" name="department" [(ngModel)]="addJ.department" #department="ngModel">
+                    <option value="Web Development">Web Development</option>
+                    <option value="Application Development">Application Development</option>
+                    <option value="IT Management">IT Management</option>
+                    <option value="Accounts Management">Accounts Management</option>
+                    <option value="Support Management">Support Management</option>
+                    <option value="Marketing">Marketing</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Location</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>No of Vacancies</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Experience</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Age</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Salary From</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Salary To</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Type</label>
+                <select class="select form-control" name="job_type" [(ngModel)]="addJ.job_type" #job_type="ngModel">
+                  <option value='Full Time'>Full Time</option>
+                  <option value='Part Time'>Part Time</option>
+                  <option value='Internship'>Internship</option>
+                  <option value='Temporary'>Temporary</option>
+                  <option value='Remote'>Remote</option>
+                  <option value='Others'>Others</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="select form-control" name="status" [(ngModel)]="addJ.status" #status="ngModel">
+                  <option value='Open'>Open</option>
+                  <option value='Closed'>Closed</option>
+                  <option value='Cancelled'>Cancelled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Start Date</label>
+                <my-date-picker [options]="myDatePickerOptions1"></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Expired Date</label>
+                <my-date-picker [options]="myDatePickerOptions1"></my-date-picker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" type='submit'>Create Job</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="edit_job" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Job</h4>
+      </div>
+      <div class="modal-body">
+        <form #uptForm="ngForm" (ngSubmit)='updateJob(uptForm)'>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Title</label>
+                <input class="form-control" type="text" name="job_title" [(ngModel)]="uptJ.job_title" #job_title="ngModel">
+                <input class="form-control" type="hidden" name="job_id" [(ngModel)]="uptJ.job_id" #job_id="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Department</label>
+                <select class="select form-control" name="department" [(ngModel)]="uptJ.department" #department="ngModel">
+                  <option value="Web Development">Web Development</option>
+                  <option value="Application Development">Application Development</option>
+                  <option value="IT Management">IT Management</option>
+                  <option value="Accounts Management">Accounts Management</option>
+                  <option value="Support Management">Support Management</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Location</label>
+                <input class="form-control" type="text" value="California">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>No of Vacancies</label>
+                <input class="form-control" type="text" value="5">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Experience</label>
+                <input class="form-control" type="text" value="2 Years">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Age</label>
+                <input class="form-control" type="text" value="-">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Salary From</label>
+                <input type="text" class="form-control" value="32k">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Salary To</label>
+                <input type="text" class="form-control" value="38k">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Job Type</label>
+                <select class="select form-control" name="job_type" [(ngModel)]="uptJ.job_type" #job_type="ngModel">
+                    <option value='Full Time'>Full Time</option>
+                    <option value='Part Time'>Part Time</option>
+                    <option value='Internship'>Internship</option>
+                    <option value='Temporary'>Temporary</option>
+                    <option value='Remote'>Remote</option>
+                    <option value='Others'>Others</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="select form-control" name="status" [(ngModel)]="uptJ.status" #status="ngModel">
+                    <option value='Open'>Open</option>
+                    <option value='Closed'>Closed</option>
+                    <option value='Cancelled'>Cancelled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Start Date</label>
+                <my-date-picker [options]="myDatePickerOptions1"></my-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Expired Date</label>
+                <my-date-picker [options]="myDatePickerOptions1"></my-date-picker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" type='submit'>Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

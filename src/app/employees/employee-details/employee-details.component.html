@@ -1,0 +1,288 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+          <h4 class="modal-title">Edit Employee</h4>
+        </div>
+      </div>
+        <div class="row m-t-20">
+          <div class="col-md-12">
+          <form class="m-b-30" #editForm="ngForm" (ngSubmit)="updateSubmit(editForm)" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">First Name <span class="text-danger">*</span></label>
+                      <input class="form-control" type="text" [(ngModel)]="uptEmp.firstName" name="firstName" #firstName="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Last Name</label>
+                      <input class="form-control" type="text" [(ngModel)]="uptEmp.lastName" name="lastName" #lastName="ngModel">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Username <span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="text" [(ngModel)]="uptEmp.userName" name="userName" #userName="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                      <label class="control-label">Email <span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="email" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})" [(ngModel)]="uptEmp.email" name="email" #email="ngModel" required>
+                      <span class="help-block" *ngIf="email.errors && email.touched">
+                        Email is invalid
+                      </span>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Password<span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="password" [(ngModel)]="uptEmp.password" name="password" #password="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Confirm Password<span class="text-danger m-l-5">*</span></label>
+                      <input class="form-control" type="password" [(ngModel)]="uptEmp.cPassword" name="cPassword" #cPassword="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Employee ID <span class="text-danger m-l-5">*</span></label>
+                      <input type="text" class="form-control" readonly [(ngModel)]="uptEmp.employeeID" name="employeeID" #employeeID="ngModel" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Joining Date <span class="text-danger m-l-5">*</span></label>
+                      <my-date-picker name="joinDate" aria-readonly [options]="myDatePickerOptions" [(ngModel)]="uptEmp.joinDate" #joinDate="ngModel" required></my-date-picker>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Company</label>
+                      <select class="select form-control" [(ngModel)]="uptEmp.company" name="company" #company="ngModel">
+                        <option value="Global Technologies">Global Technologies</option>
+                        <option value="Delta Infotech">Delta Infotech</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label">Designation<span class="text-danger m-l-5">*</span></label>
+                      <select class="select form-control" [(ngModel)]="uptEmp.designation" name="designation" #designation="ngModel" required>
+                        <option value="Web Developer">Web Developer</option>
+                        <option value="Web Designer">Web Designer</option>
+                        <option value="SEO Analyst">SEO Analyst</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group" [class.has-error]="phone.invalid && phone.touched" [class.has-success]="phone.valid">
+                      <label class="control-label">Phone <span class="text-danger">*</span></label>
+                      <input class="form-control unit-cost" type="text" [(ngModel)]="uptEmp.phone" name="phone" #phone="ngModel" pattern="(\d{10}|\d{12})" required>
+                      <span class="help-block" *ngIf="phone.errors && phone.touched">
+                        Phone Number is invalid
+                      </span>
+                    </div>
+                  </div>
+                </div> 
+            <div class="table-responsive m-t-15">
+              <table class="table table-striped custom-table">
+                <thead>
+                  <tr>
+                    <th>Module Permission</th>
+                    <th class="text-center">Read</th>
+                    <th class="text-center">Write</th>
+                    <th class="text-center">Create</th>
+                    <th class="text-center">Delete</th>
+                    <th class="text-center">Import</th>
+                    <th class="text-center">Export</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Holidays</td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_read ? 'checked' : null" [(ngModel)]="user.holiday_read" name="holiday_read" type="checkbox">
+                        </td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_write ? 'checked' : null" [(ngModel)]="user.holiday_write" name="holiday_write" type="checkbox">
+                        </td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_create ? 'checked' : null" [(ngModel)]="user.holiday_create" name="holiday_create" type="checkbox">
+                        </td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_delete ? 'checked' : null" [(ngModel)]="user.holiday_delete" name="holiday_delete" type="checkbox">
+                        </td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_import ? 'checked' : null" [(ngModel)]="user.holiday_import" name="holiday_import" type="checkbox">
+                        </td>
+                        <td class="text-center">
+                          <input [attr.checked]="user.holiday_export ? 'checked' : null" [(ngModel)]="user.holiday_export" name="holiday_export" type="checkbox">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Leave Request</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_read ? 'checked' : null" [(ngModel)]="user.leaveReq_read" name="leaveReq_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_write ? 'checked' : null" [(ngModel)]="user.leaveReq_write" name="leaveReq_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_create ? 'checked' : null" [(ngModel)]="user.leaveReq_create" name="leaveReq_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_delete ? 'checked' : null" [(ngModel)]="user.leaveReq_delete" name="leaveReq_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_import ? 'checked' : null" [(ngModel)]="user.leaveReq_import" name="leaveReq_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.leaveReq_export ? 'checked' : null" [(ngModel)]="user.leaveReq_export" name="leaveReq_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Clients</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.clients_read ? 'checked' : null" [(ngModel)]="user.clients_read" name="clients_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.clients_write ? 'checked' : null" [(ngModel)]="user.clients_write" name="clients_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.clients_create ? 'checked' : null" [(ngModel)]="user.clients_create" name="clients_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.clients_delete ? 'checked' : null" [(ngModel)]="user.clients_delete" name="clients_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.clients_import ? 'checked' : null" [(ngModel)]="user.clients_import" name="clients_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.clients_export ? 'checked' : null" [(ngModel)]="user.clients_export" name="clients_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Projects</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.projects_read ? 'checked' : null" [(ngModel)]="user.projects_read" name="projects_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.projects_write ? 'checked' : null" [(ngModel)]="user.projects_write" name="projects_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.projects_create ? 'checked' : null" [(ngModel)]="user.projects_create" name="projects_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.projects_delete ? 'checked' : null" [(ngModel)]="user.projects_delete" name="projects_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.projects_import ? 'checked' : null" [(ngModel)]="user.projects_import" name="projects_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.projects_export ? 'checked' : null" [(ngModel)]="user.projects_export" name="projects_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Tasks</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.tasks_read ? 'checked' : null" [(ngModel)]="user.tasks_read" name="tasks_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.tasks_write ? 'checked' : null" [(ngModel)]="user.tasks_write" name="tasks_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.tasks_create ? 'checked' : null" [(ngModel)]="user.tasks_create" name="tasks_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.tasks_delete ? 'checked' : null" [(ngModel)]="user.tasks_delete" name="tasks_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.tasks_import ? 'checked' : null" [(ngModel)]="user.tasks_import" name="tasks_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.tasks_export ? 'checked' : null" [(ngModel)]="user.tasks_export" name="tasks_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Chats</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.chats_read ? 'checked' : null" [(ngModel)]="user.chats_read" name="chats_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.chats_write ? 'checked' : null" [(ngModel)]="user.chats_write" name="chats_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.chats_create ? 'checked' : null" [(ngModel)]="user.chats_create" name="chats_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.chats_delete ? 'checked' : null" [(ngModel)]="user.chats_delete" name="chats_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.chats_import ? 'checked' : null" [(ngModel)]="user.chats_import" name="chats_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.chats_export ? 'checked' : null" [(ngModel)]="user.chats_export" name="chats_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Assets</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.assets_read ? 'checked' : null" [(ngModel)]="user.assets_read" name="assets_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.assets_write ? 'checked' : null" [(ngModel)]="user.assets_write" name="assets_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.assets_create ? 'checked' : null" [(ngModel)]="user.assets_create" name="assets_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.assets_delete ? 'checked' : null" [(ngModel)]="user.assets_delete" name="assets_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.assets_import ? 'checked' : null" [(ngModel)]="user.assets_import" name="assets_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.assets_export ? 'checked' : null" [(ngModel)]="user.assets_export" name="assets_export" type="checkbox">
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Timing Sheets</td>
+                        <td class="text-center">
+                            <input [attr.checked]="user.timesheet_read ? 'checked' : null" [(ngModel)]="user.timesheet_read" name="timesheet_read" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.timesheet_write ? 'checked' : null" [(ngModel)]="user.timesheet_write" name="timesheet_write" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.timesheet_create ? 'checked' : null" [(ngModel)]="user.timesheet_create" name="timesheet_create" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.timesheet_delete ? 'checked' : null" [(ngModel)]="user.timesheet_delete" name="timesheet_delete" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.timesheet_import ? 'checked' : null" [(ngModel)]="user.timesheet_import" name="timesheet_import" type="checkbox">
+                          </td>
+                          <td class="text-center">
+                            <input [attr.checked]="user.timesheet_export ? 'checked' : null" [(ngModel)]="user.timesheet_export" name="timesheet_export" type="checkbox">
+                          </td>
+                      </tr>
+               </tbody>
+              </table>
+              <br>
+              
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="uptEmployeeValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ 

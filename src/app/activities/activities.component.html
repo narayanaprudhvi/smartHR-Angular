@@ -1,0 +1,33 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Activities</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="activity">
+        <div class="activity-box">
+          <ul class="activity-list">
+            <li *ngFor="let item of activities">
+              <div class="activity-user">
+                <a href="javascript:" title="{{item.user}}" data-toggle="tooltip" class="avatar">
+                  <img alt="Lesley Grauer" src="assets/img/user.jpg" class="img-responsive img-circle">
+                </a>
+              </div>
+              <div class="activity-content">
+                <div class="timeline-content">
+                  <a href="javascript:" class="name">{{item.user}}</a> {{item.message}} <a href="javascript">{{item.source}}</a>
+                  <span class="time">{{item.time}}</span>
+                </div>
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

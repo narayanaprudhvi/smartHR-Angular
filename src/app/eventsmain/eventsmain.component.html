@@ -1,0 +1,348 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-8">
+          <h4 class="page-title">Events</h4>
+        </div>
+        <div class="col-xs-4 text-right m-b-30">
+          <a href="javascript:" class="btn btn-primary rounded pull-right" (click)="addReset();"><i class="fa fa-plus"></i>
+            Add Event</a>
+        </div>
+      </div>
+      <br>
+<div *ngIf="calendarOptions">
+  <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+      (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+</div>
+</div>
+
+
+<div id="add_event" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Ticket</h4>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addEvent(addForm)" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Title</label>
+                <input class="form-control" type="text" [(ngModel)]="addE.title" name="title" #title="ngModel">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Ticket Id</label>
+                <input class="form-control" readonly type="text" [(ngModel)]="addE.id" name="id" #id="ngModel">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                  <div class="col-sm-6">
+              <div class="form-group">
+                  <my-date-picker [options]="myDatePickerOptions1"
+                  placeholder="Start Date"  readonly type="text" [(ngModel)]="addE.start" name="start" #start="ngModel"></my-date-picker>
+              </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="form-group">
+                  <select class="select event-from-time form-control"  name="start_time" [(ngModel)]="addE.start_time" #start_time="ngModel">
+                    <option value="00:00:00">12:00 am</option>
+                    <option value="00:30:00">12:30 am</option>
+                    <option value="01:00:00">01:00 am</option>
+                    <option value="01:30:00">01:30 am</option>
+                    <option value="02:00:00">02:00 am</option>
+                    <option value="02:30:00">02:30 am</option>
+                    <option value="03:00:00">03:00 am</option>
+                    <option value="03:30:00">03:30 am</option>
+                    <option value="04:00:00">04:00 am</option>
+                    <option value="04:30:00">04:30 am</option>
+                    <option value="05:00:00">05:00 am</option>
+                    <option value="05:30:00">05:30 am</option>
+                    <option value="06:00:00">06:00 am</option>
+                    <option value="06:30:00">06:30 am</option>
+                    <option value="07:00:00">07:00 am</option>
+                    <option value="07:30:00">07:30 am</option>
+                    <option value="08:00:00">08:00 am</option>
+                    <option value="08:30:00">08:30 am</option>
+                    <option value="09:00:00">09:00 am</option>
+                    <option value="09:30:00">09:30 am</option>
+                    <option value="10:00:00">10:00 am</option>
+                    <option value="10:30:00">10:30 am</option>
+                    <option value="11:00:00">11:00 am</option>
+                    <option value="11:30:00">11:30 am</option>
+                    <option value="12:00:00">12:00 pm</option>
+                    <option value="12:30:00">12:30 pm</option>
+                    <option value="13:00:00">01:00 pm</option>
+                    <option value="13:30:00">01:30 pm</option>
+                    <option value="14:00:00">02:00 pm</option>
+                    <option value="14:30:00">02:30 pm</option>
+                    <option value="15:00:00">03:00 pm</option>
+                    <option value="15:30:00">03:30 pm</option>
+                    <option value="16:00:00">04:00 pm</option>
+                    <option value="16:30:00">04:30 pm</option>
+                    <option value="17:00:00">05:00 pm</option>
+                    <option value="17:30:00">05:30 pm</option>
+                    <option value="18:00:00">06:00 pm</option>
+                    <option value="18:30:00">06:30 pm</option>
+                    <option value="19:00:00">07:00 pm</option>
+                    <option value="19:30:00">07:30 pm</option>
+                    <option value="20:00:00">08:00 pm</option>
+                    <option value="20:30:00">08:30 pm</option>
+                    <option value="21:00:00">09:00 pm</option>
+                    <option value="21:30:00">09:30 pm</option>
+                    <option value="22:00:00">10:00 pm</option>
+                    <option value="22:30:00">10:30 pm</option>
+                    <option value="23:00:00">11:00 pm</option>
+                    <option value="23:30:00">11:30 pm</option>
+                    
+                  </select>
+                  </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                   <div class="row">
+                        <div class="col-sm-6">
+                    <div class="form-group">
+                        <my-date-picker [options]="myDatePickerOptions1"
+                        placeholder="End Date"  readonly type="text" [(ngModel)]="addE.end" name="end" #end="ngModel"></my-date-picker>
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                        <select class="select event-from-time form-control" name="end_time" [(ngModel)]="addE.end_time" #end_time="ngModel">
+                          <option value="00:00:00">12:00 am</option>
+                          <option value="00:30:00">12:30 am</option>
+                          <option value="01:00:00">01:00 am</option>
+                          <option value="01:30:00">01:30 am</option>
+                          <option value="02:00:00">02:00 am</option>
+                          <option value="02:30:00">02:30 am</option>
+                          <option value="03:00:00">03:00 am</option>
+                          <option value="03:30:00">03:30 am</option>
+                          <option value="04:00:00">04:00 am</option>
+                          <option value="04:30:00">04:30 am</option>
+                          <option value="05:00:00">05:00 am</option>
+                          <option value="05:30:00">05:30 am</option>
+                          <option value="06:00:00">06:00 am</option>
+                          <option value="06:30:00">06:30 am</option>
+                          <option value="07:00:00">07:00 am</option>
+                          <option value="07:30:00">07:30 am</option>
+                          <option value="08:00:00">08:00 am</option>
+                          <option value="08:30:00">08:30 am</option>
+                          <option value="09:00:00">09:00 am</option>
+                          <option value="09:30:00">09:30 am</option>
+                          <option value="10:00:00">10:00 am</option>
+                          <option value="10:30:00">10:30 am</option>
+                          <option value="11:00:00">11:00 am</option>
+                          <option value="11:30:00">11:30 am</option>
+                          <option value="12:00:00">12:00 pm</option>
+                          <option value="12:30:00">12:30 pm</option>
+                          <option value="13:00:00">01:00 pm</option>
+                          <option value="13:30:00">01:30 pm</option>
+                          <option value="14:00:00">02:00 pm</option>
+                          <option value="14:30:00">02:30 pm</option>
+                          <option value="15:00:00">03:00 pm</option>
+                          <option value="15:30:00">03:30 pm</option>
+                          <option value="16:00:00">04:00 pm</option>
+                          <option value="16:30:00">04:30 pm</option>
+                          <option value="17:00:00">05:00 pm</option>
+                          <option value="17:30:00">05:30 pm</option>
+                          <option value="18:00:00">06:00 pm</option>
+                          <option value="18:30:00">06:30 pm</option>
+                          <option value="19:00:00">07:00 pm</option>
+                          <option value="19:30:00">07:30 pm</option>
+                          <option value="20:00:00">08:00 pm</option>
+                          <option value="20:30:00">08:30 pm</option>
+                          <option value="21:00:00">09:00 pm</option>
+                          <option value="21:30:00">09:30 pm</option>
+                          <option value="22:00:00">10:00 pm</option>
+                          <option value="22:30:00">10:30 pm</option>
+                          <option value="23:00:00">11:00 pm</option>
+                          <option value="23:30:00">11:30 pm</option>
+                          
+                        </select>
+                        </div>
+                      </div>
+                      </div>
+            </div>
+          </div>
+          <div class="m-t-20 text-center">
+            <button class="btn btn-primary" type="submit">Create Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div id="edit_event" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-content modal-lg">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Ticket</h4>
+        </div>
+        <div class="modal-body">
+          <form novalidate>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input class="form-control" type="text" [(ngModel)]="uptE.title" name="title" #title="ngModel">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Ticket Id</label>
+                  <input class="form-control" readonly type="text" [(ngModel)]="uptE.id" name="id" #id="ngModel">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                <div class="form-group">
+                    <my-date-picker [options]="myDatePickerOptions1"
+                    placeholder="Start Date"  readonly type="text" [(ngModel)]="uptE.start" name="start" #start="ngModel"></my-date-picker>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <select class="select event-from-time form-control"  name="start_time" [(ngModel)]="uptE.start_time" #start_time="ngModel">
+                      <option value="00:00:00">12:00 am</option>
+                      <option value="00:30:00">12:30 am</option>
+                      <option value="01:00:00">01:00 am</option>
+                      <option value="01:30:00">01:30 am</option>
+                      <option value="02:00:00">02:00 am</option>
+                      <option value="02:30:00">02:30 am</option>
+                      <option value="03:00:00">03:00 am</option>
+                      <option value="03:30:00">03:30 am</option>
+                      <option value="04:00:00">04:00 am</option>
+                      <option value="04:30:00">04:30 am</option>
+                      <option value="05:00:00">05:00 am</option>
+                      <option value="05:30:00">05:30 am</option>
+                      <option value="06:00:00">06:00 am</option>
+                      <option value="06:30:00">06:30 am</option>
+                      <option value="07:00:00">07:00 am</option>
+                      <option value="07:30:00">07:30 am</option>
+                      <option value="08:00:00">08:00 am</option>
+                      <option value="08:30:00">08:30 am</option>
+                      <option value="09:00:00">09:00 am</option>
+                      <option value="09:30:00">09:30 am</option>
+                      <option value="10:00:00">10:00 am</option>
+                      <option value="10:30:00">10:30 am</option>
+                      <option value="11:00:00">11:00 am</option>
+                      <option value="11:30:00">11:30 am</option>
+                      <option value="12:00:00">12:00 pm</option>
+                      <option value="12:30:00">12:30 pm</option>
+                      <option value="13:00:00">01:00 pm</option>
+                      <option value="13:30:00">01:30 pm</option>
+                      <option value="14:00:00">02:00 pm</option>
+                      <option value="14:30:00">02:30 pm</option>
+                      <option value="15:00:00">03:00 pm</option>
+                      <option value="15:30:00">03:30 pm</option>
+                      <option value="16:00:00">04:00 pm</option>
+                      <option value="16:30:00">04:30 pm</option>
+                      <option value="17:00:00">05:00 pm</option>
+                      <option value="17:30:00">05:30 pm</option>
+                      <option value="18:00:00">06:00 pm</option>
+                      <option value="18:30:00">06:30 pm</option>
+                      <option value="19:00:00">07:00 pm</option>
+                      <option value="19:30:00">07:30 pm</option>
+                      <option value="20:00:00">08:00 pm</option>
+                      <option value="20:30:00">08:30 pm</option>
+                      <option value="21:00:00">09:00 pm</option>
+                      <option value="21:30:00">09:30 pm</option>
+                      <option value="22:00:00">10:00 pm</option>
+                      <option value="22:30:00">10:30 pm</option>
+                      <option value="23:00:00">11:00 pm</option>
+                      <option value="23:30:00">11:30 pm</option>
+                      
+                    </select>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                     <div class="row">
+                          <div class="col-sm-6">
+                      <div class="form-group">
+                          <my-date-picker [options]="myDatePickerOptions1"
+                          placeholder="End Date"  readonly type="text" [(ngModel)]="uptE.end" name="end" #end="ngModel"></my-date-picker>
+                      </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                          <select class="select event-from-time form-control" name="end_time" [(ngModel)]="uptE.end_time" #end_time="ngModel">
+                            <option value="00:00:00">12:00 am</option>
+                            <option value="00:30:00">12:30 am</option>
+                            <option value="01:00:00">01:00 am</option>
+                            <option value="01:30:00">01:30 am</option>
+                            <option value="02:00:00">02:00 am</option>
+                            <option value="02:30:00">02:30 am</option>
+                            <option value="03:00:00">03:00 am</option>
+                            <option value="03:30:00">03:30 am</option>
+                            <option value="04:00:00">04:00 am</option>
+                            <option value="04:30:00">04:30 am</option>
+                            <option value="05:00:00">05:00 am</option>
+                            <option value="05:30:00">05:30 am</option>
+                            <option value="06:00:00">06:00 am</option>
+                            <option value="06:30:00">06:30 am</option>
+                            <option value="07:00:00">07:00 am</option>
+                            <option value="07:30:00">07:30 am</option>
+                            <option value="08:00:00">08:00 am</option>
+                            <option value="08:30:00">08:30 am</option>
+                            <option value="09:00:00">09:00 am</option>
+                            <option value="09:30:00">09:30 am</option>
+                            <option value="10:00:00">10:00 am</option>
+                            <option value="10:30:00">10:30 am</option>
+                            <option value="11:00:00">11:00 am</option>
+                            <option value="11:30:00">11:30 am</option>
+                            <option value="12:00:00">12:00 pm</option>
+                            <option value="12:30:00">12:30 pm</option>
+                            <option value="13:00:00">01:00 pm</option>
+                            <option value="13:30:00">01:30 pm</option>
+                            <option value="14:00:00">02:00 pm</option>
+                            <option value="14:30:00">02:30 pm</option>
+                            <option value="15:00:00">03:00 pm</option>
+                            <option value="15:30:00">03:30 pm</option>
+                            <option value="16:00:00">04:00 pm</option>
+                            <option value="16:30:00">04:30 pm</option>
+                            <option value="17:00:00">05:00 pm</option>
+                            <option value="17:30:00">05:30 pm</option>
+                            <option value="18:00:00">06:00 pm</option>
+                            <option value="18:30:00">06:30 pm</option>
+                            <option value="19:00:00">07:00 pm</option>
+                            <option value="19:30:00">07:30 pm</option>
+                            <option value="20:00:00">08:00 pm</option>
+                            <option value="20:30:00">08:30 pm</option>
+                            <option value="21:00:00">09:00 pm</option>
+                            <option value="21:30:00">09:30 pm</option>
+                            <option value="22:00:00">10:00 pm</option>
+                            <option value="22:30:00">10:30 pm</option>
+                            <option value="23:00:00">11:00 pm</option>
+                            <option value="23:30:00">11:30 pm</option>
+                            
+                          </select>
+                          </div>
+                        </div>
+                        </div>
+              </div>
+            </div>
+            <div class="m-b-30">
+                <button class="btn btn-danger pull-left" >Delete Event</button>
+              <button class="btn btn-primary pull-right" (click)="updateEvent();">Update Event</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> 
+  </div>

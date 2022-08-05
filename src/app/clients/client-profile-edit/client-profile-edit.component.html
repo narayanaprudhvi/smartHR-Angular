@@ -1,0 +1,102 @@
+<div class="page-wrapper">
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <h4 class="page-title">Edit Profile</h4>
+      </div>
+    </div>
+    <form #saveForm="ngForm" (ngSubmit)="updateProfile(saveForm)" novalidate>
+      <div class="card-box">
+        <h3 class="card-title">Basic Informations</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="profile-img-wrap">
+              <img class="inline-block" src="assets/img/user.jpg" alt="user">
+              <div class="fileupload btn btn-default">
+                <span class="btn-text">edit</span>
+                <input class="upload" type="file">
+              </div>
+            </div>
+            <div class="profile-basic">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-focus focused">
+                    <label class="control-label">First Name<span class="text-danger m-l-5">*</span></label>
+                    <input type="text" class="form-control floating" [(ngModel)]="viewP.firstName" name="firstName" #firstName="ngModel" required/>
+                    <input type="hidden" class="form-control floating" [(ngModel)]="viewP.clientID" name="clientID" #clientID="ngModel" required/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-focus focused">
+                    <label class="control-label">Last Name<span class="text-danger m-l-5">*</span></label>
+                    <input type="text" class="form-control floating" [(ngModel)]="viewP.lastName" name="lastName" #lastName="ngModel"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <my-date-picker name="birthday" [options]="myDatePickerOptions" [(ngModel)]="viewP.birthday" #birthday="ngModel"
+                      required></my-date-picker>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-focus select-focus">
+                    <label class="control-label">Gendar<span class="text-danger m-l-5">*</span></label>
+                    <select class="select form-control floating" [(ngModel)]="viewP.gender" name="gender" #gender="ngModel" required>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-box">
+        <h3 class="card-title">Contact Informations</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group form-focus focused">
+              <label class="control-label">Address<span class="text-danger m-l-5">*</span></label>
+              <input type="text" class="form-control floating" [(ngModel)]="viewP.address" name="address" #address="ngModel" required />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-focus focused">
+              <label class="control-label">State</label>
+              <input type="text" class="form-control floating" [(ngModel)]="viewP.state" name="state" #state="ngModel" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-focus focused">
+              <label class="control-label">Country</label>
+              <input type="text" class="form-control floating" [(ngModel)]="viewP.country" name="country" #country="ngModel"/>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-focus focused">
+              <label class="control-label">Pin Code</label>
+              <input type="text" class="form-control floating" [(ngModel)]="viewP.pincode" name="pincode" #pincode="ngModel"/>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-focus focused" [class.has-error]="mobile.invalid && mobile.touched" [class.has-success]="mobile.valid">
+                <label class="control-label">Phone Number<span class="text-danger">*</span></label>
+                <input class="form-control floating unit-cost" type="text" [(ngModel)]="viewP.mobile" name="mobile" #mobile="ngModel" pattern="(\d{10}|\d{12})" required>
+                
+              </div>
+              <span class="help-block" *ngIf="mobile.errors && mobile.touched">
+                  Phone Number is invalid
+                </span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center m-t-20">
+          <div *ngIf="uptClientProfileValidation" class="alert alert-info m-t-10">
+              <strong>Warning!</strong> Must Fill all Mandatory Fields (including D.O.B).
+          </div>
+        <button class="btn btn-primary btn-lg" type="submit">Save &amp; update</button>
+      </div>
+    </form>
+  </div>
+</div>

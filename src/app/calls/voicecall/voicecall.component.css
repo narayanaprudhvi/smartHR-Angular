@@ -1,0 +1,13 @@
+.content{
+    padding-top:60px;
+}
+
+.plus-group,.plus-chat{
+    color:#ff9b44;
+    font-size:1.5em;
+    cursor: pointer;
+}
+
+.page-wrapper {
+    min-height:650px;
+}

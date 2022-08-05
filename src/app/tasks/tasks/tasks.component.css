@@ -1,0 +1,20 @@
+.content{
+    padding-top:60px;
+}
+
+.add-new-task-btn{
+    border-radius:0;
+}
+
+.circle-completed{
+    background: #35BA67;
+    border: 1px solid #2fa65c;
+}
+
+.task-label-completed{
+    color:#ccc !important;
+}
+
+.page-wrapper {
+    min-height:650px;
+}

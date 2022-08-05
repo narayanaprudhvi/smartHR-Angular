@@ -1,0 +1,85 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+         <h4 class="modal-title">Edit Provident Fund</h4>
+      </div>
+    </div>
+      <div class="row m-t-20">
+          <div class="col-sm-12">
+          <form #uptForm="ngForm" (submit)="updateFund(uptForm)">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Employee Name<span class="text-danger m-l-5">*</span></label>
+                  <select class="form-control select" [(ngModel)]="uptPF.employee_name" name="employee_name" #employee_name="ngModel" required>
+                    <option value="" selected="selected" disabled>Select Employee</option>
+                    <option value="John Doe">John Doe (FT-0001)</option>
+                    <option value="Richard Miles">Richard Miles (FT-0002)</option>
+                  </select>
+                  <input class="form-control" type="hidden" [(ngModel)]="uptPF.fund_id" name="fund_id" #fund_id="ngModel">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Provident Fund Type<span class="text-danger m-l-5">*</span></label>
+                  <select class="form-control select" [(ngModel)]="uptPF.fund_type" name="fund_type" #fund_type="ngModel" required>
+                    <option value="" selected="selected" disabled>Select Fund Type</option>
+                    <option value="Fixed Amount">Fixed Amount</option>
+                    <option value="Percentage of Basic Salary">Percentage of Basic Salary</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="show-fixed-amount" style="display: block;">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Employee Share (Amount)</label>
+                        <input class="form-control unit-cost" type="text" [(ngModel)]="uptPF.employee_amount" name="employee_amount"  #employee_amount="ngModel">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Organization Share (Amount)</label>
+                        <input class="form-control unit-cost" type="text" [(ngModel)]="uptPF.organization_amount" name="organization_amount"  #organization_amount="ngModel">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="show-basic-salary">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Employee Share (%)<span class="text-danger m-l-5">*</span></label>
+                        <input class="form-control" type="text" min=0 [(ngModel)]="uptPF.employee_share" name="employee_share" #employee_share="ngModel" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Organization Share (%)<span class="text-danger m-l-5">*</span></label>
+                        <input class="form-control" type="text" min=0 [(ngModel)]="uptPF.organization_share" name="organization_share" #organization_share="ngModel" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea class="form-control" [(ngModel)]="uptPF.description" name="description" #description="ngModel"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="uptFundValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary" type="submit">Save & Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

@@ -1,0 +1,25 @@
+<div class="content container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+          <h4 class="modal-title">Edit Department</h4>
+        </div>
+    </div>
+    <div class="row m-t-20">
+        <div class="col-md-6 col-md-offset-3">
+          <form #uptForm="ngForm" (ngSubmit)="updateDepartment(uptForm)" novalidate>
+            <div class="form-group">
+              <label>Department Name <span class="text-danger">*</span></label>
+              <input class="form-control" [(ngModel)]="uptD.department" name="department" type="text" #department="ngModel" required>
+              <input type="hidden" [(ngModel)]="uptD.department_id" name="department_id" #department_id="ngModel">
+            </div>
+            <div class="m-t-20 text-center">
+                <div *ngIf="uptDepartmentValidation" class="alert alert-info m-t-10">
+                    <strong>Warning!</strong> Must Fill all Mandatory Fields.
+                </div>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

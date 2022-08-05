@@ -1,0 +1,383 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Attendance Sheet</h4>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group form-focus">
+        <label class="control-label">Employee Name</label>
+        <input type="text" class="form-control floating" (input)="searchName($event.target.value)"/>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Select Month</label>
+        <select class="select floating form-control">
+          <option>-</option>
+          <option>Jan</option>
+          <option>Feb</option>
+          <option>Mar</option>
+          <option>Apr</option>
+          <option>May</option>
+          <option>Jun</option>
+          <option>Jul</option>
+          <option>Aug</option>
+          <option>Sep</option>
+          <option>Oct</option>
+          <option>Nov</option>
+          <option>Dec</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group form-focus select-focus">
+        <label class="control-label">Select Year</label>
+        <select class="select floating form-control">
+          <option>-</option>
+          <option>2018</option>
+          <option>2017</option>
+          <option>2016</option>
+          <option>2015</option>
+          <option>2014</option>
+          <option>2013</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="table-responsive">
+        <table class="table table-striped custom-table m-b-0">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th *ngFor="let i of days">{{i+1}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rows">
+              <td>{{item.name}}</td>
+              <td>
+                <div *ngIf="item.day1 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day1 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day1 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day1 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day2 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day2 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day2 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day2 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day3 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day3 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day3 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day3 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day4 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day4 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day4 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day4 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day5 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day5 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day5 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day5 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day6 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day6 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day6 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day6 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day7 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day7 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day7 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day7 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day8 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day8 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day8 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day8 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day9 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day9 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day9 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day9 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day10 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day10 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day10 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day10 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day11 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day11 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day11 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day11 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day12 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day12 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day12 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day12 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day13 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day13 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day13 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day13 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day14 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day14 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day14 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day14 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day15 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day15 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day15 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day15 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day16 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day16 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day16 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day16 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day17 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day17 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day17 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day17 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day18 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day18 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day18 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day18 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day19 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day19 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day19 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day19 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day20 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day20 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day20 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day20 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day21 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day21 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day21 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day21 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day22 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day22 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day22 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day22 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day23 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day23 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day23 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day23 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day24 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day24 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day24 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day24 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day25 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day25 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day25 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day25 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day26 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day26 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day26 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day26 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day27 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day27 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day27 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day27 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day28 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day28 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day28 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day28 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day29 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day29 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day29 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day29 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day30 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day30 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day30 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day30 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="item.day31 == 'on'"><i class="fa fa-check text-success"></i></div>
+                <div *ngIf="item.day31 == 'off'"><i class="fa fa-close text-danger"></i></div>
+                <div *ngIf="item.day31 == 'first-off'" class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span><span
+                    class="first-off"><i class="fa fa-close text-danger"></i></span>
+                </div>
+                <div *ngIf="item.day31 == 'second-off'" class="half-day"><span class="first-off"><i class="fa fa-close text-danger"></i></span>
+                  <span class="first-off"><i class="fa fa-check text-success"></i></span>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

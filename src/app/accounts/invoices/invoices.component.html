@@ -1,0 +1,263 @@
+<div class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title">Invoices</h4>
+    </div>
+    <div class="col-sm-4 text-right m-b-30">
+      <a href="javascript:" class="btn btn-primary rounded"  data-toggle="modal" data-target="#add_invoice"><i class="fa fa-plus"></i> Create New Invoice</a>
+    </div>
+  </div>
+  <div class="row filter-row">
+    <div class="col-sm-3 col-xs-6">
+      <my-date-picker [options]="myDatePickerOptions" placeholder="From"
+        ></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <my-date-picker [options]="myDatePickerOptions" placeholder="To"></my-date-picker>
+    </div>
+    <div class="col-sm-3 col-xs-6"> 
+      <div class="form-group form-focus select-focus focused">
+        <label class="control-label">Status</label>
+        <select class="select floating form-control"> 
+          <option value="" selected="selected" disabled>All Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Paid">Paid</option>
+          <option value="Partially Paid">Partially Paid</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">  
+      <a href="javascript:" class="btn btn-success btn-block"> Search </a>  
+    </div>     
+            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive table-responsive-inherit">
+        <table class="table table-striped custom-table m-b-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Invoice Number</th>
+              <th>Client</th>
+              <th>Created Date</th>
+              <th>Due Date</th>
+              <th>Amount</th>
+              <th width="10%" class="text-center">Status</th>
+              <th class="text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rows;index as i">
+              <td>{{i+1}}</td>
+              <td><a href="javascript:" (click)="onView(item.inv_number);">#INV-00{{item.inv_number}}</a></td>
+              <td>{{item.client}}</td>
+              <td>{{item.est_date.formatted}}</td>
+              <td>{{item.exp_date.formatted}}</td>
+              <td>{{item.grand_total}}</td>
+              <td class="text-center"><span class="label" [ngClass]="[item.status == 'Paid' ? 'label-success-border' : '',item.status == 'Sent' ? 'label-info-border' : '', item.status == 'Partially Paid' ? 'label-warning-border' : '']">{{item.status}}</span></td>
+              <td class="text-right">
+                <div class="dropdown">
+                  <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:" (click)="onEdit(item);"><i class="fa fa-pencil m-r-5"></i> Edit</a></li>
+                    <li><a href="javascript:" (click)="onView(item.inv_number);"><i class="fa fa-eye m-r-5"></i> View</a></li>
+                    <li><a href="javascript:"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a></li>
+                    <li><a href="javascript:" (click)="onDelete(item.inv_number);"><i class="fa fa-trash-o m-r-5"></i> Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add_invoice" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="page-title">Create Invoice</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form #addForm="ngForm" (ngSubmit)="addInvoice(addForm)" novalidate>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Client <span class="text-danger">*</span></label>
+                    <select class="select form-control" [(ngModel)]="addV.client" name="client" #client="ngModel" required>
+                      <option value="" selected="selected" disabled>Please Select</option>
+                      <option value="Barry Cuda">Barry Cuda</option>
+                      <option value="Tressa Wexler">Tressa Wexler</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Project <span class="text-danger">*</span></label>
+                    <select class="select form-control" [(ngModel)]="addV.project" name="project" #project="ngModel" required>
+                      <option value="" selected="selected" disabled>Select Project</option>
+                      <option value="Food and Drinks">Food and Drinks</option>
+                      <option value="School Guru">School Guru</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                        <label class="control-label">Email <span class="text-danger m-l-5">*</span> <span class="help-block help-block-top" *ngIf="email.errors && email.touched">Email is invalid</span></label>
+                        <input class="form-control" type="email" pattern="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})" [(ngModel)]="addV.email" name="email" #email="ngModel" required>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Tax</label>
+                    <select class="select form-control" [(ngModel)]="addV.tax_type" name="tax_type">
+                      <option value="" selected="selected" disabled>Select Tax</option>
+                      <option value="VAT">VAT</option>
+                      <option value="GST">GST</option>
+                      <option Value="No Tax">No Tax</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Client Address</label>
+                    <textarea class="form-control" rows="3" [(ngModel)]="addV.client_address" name="client_address"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Billing Address</label>
+                    <textarea class="form-control" rows="3" [(ngModel)]="addV.billing_address" name="billing_address"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Estimate Date <span class="text-danger">*</span></label>
+                    <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="addV.est_date" name="est_date" #est_date="ngModel"
+                      required></my-date-picker>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Expiry Date <span class="text-danger">*</span></label>
+                    <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="addV.exp_date" name="exp_date" #exp_date="ngModel"
+                      required></my-date-picker>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="table-responsive" [formGroup]="createForm">
+                    <table class="table table-hover table-white" formArrayName="fieldArray">
+                      <thead>
+                        <tr>
+                          <th style="width: 20px">#</th>
+                          <th class="col-sm-2">Item</th>
+                          <th class="col-md-6">Description</th>
+                          <th style="width:100px;">Unit Cost</th>
+                          <th style="width:80px;">Qty</th>
+                          <th>Amount</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody >
+                        <tr [formGroupName]="j" *ngFor="let field of createForm.controls.fieldArray['controls'] as result; index as j">
+                          <td><span>{{j + 1}}</span></td>
+                          <td>
+                            <input class="form-control" type="text" formControlName = "item" style="min-width:150px">
+                          </td>
+                          <td>
+                            <input class="form-control" type="text" formControlName = "description" style="min-width:150px">
+                          </td>
+                          <td>
+                            <input class="form-control unit-cost" style="width:100px" (input)="getQtyC(j)" formControlName = "unitcost" min=1 type="text" >
+                          </td>
+                          <td>
+                            <input class="form-control" (input)="getQtyC(j)" style="width:80px"  formControlName = "quantity" min=1 type="text" >
+                          </td>
+                          <td>
+                            <input class="form-control" readonly=""  style="width:120px" type="text" formControlName = "amount">
+                          </td>
+                          <td>
+                            <a *ngIf="j ===0 && result.length === 1" href="javascript:void(0)" class="text-danger font-18" title="Rest"
+                            (click)="resetItemValueC(j);"><i class="fa fa-refresh"></i></a>
+                            <a *ngIf="j > 0" href="javascript:void(0)" class="text-danger font-18"
+                            title="Remove" (click)="removeItemC(j);"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="6">
+                            <div style="float:right;"><button type="button" class="btn btn-primary" title="Add" (click)="addItemC();">Add Item</button></div>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-white">
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="text-right">Total</td>
+                          <td style="text-align: right; width: 230px">{{addV.item_total}}<input class="form-control text-right"  [(ngModel)]="addV.item_total" name="item_total" type="hidden"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="5" style="text-align: right">Tax</td>
+                          <td style="text-align: right;width: 230px">
+                            <input class="form-control text-right"  [(ngModel)]="addV.item_tax" name="item_tax" readonly="" type="text">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="5" style="text-align: right">
+                            Discount %
+                          </td>
+                          <td style="text-align: right; width: 230px">
+                            <input class="form-control text-right unit-cost" (input)="getDisC($event.target.value)" min=0 max=100 [(ngModel)]="addV.item_discount" name="item_discount" type="text">
+                            
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="5" style="text-align: right; font-weight: bold">
+                            Grand Total
+                          </td>
+                          <td style="text-align: right; font-weight: bold; font-size: 16px;width: 230px">
+                            <input class="form-control text-right"  [(ngModel)]="addV.grand_total" name="grand_total" type="hidden">
+                           {{addV.grand_total}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Other Information</label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="addV.other_info" name="other_info"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="addInvoiceValidation" class="alert alert-info m-t-10">
+                  <strong>Warning!</strong> Must Fill all Mandatory Fields.
+              </div>
+              <button class="btn btn-primary" type="submit">Save & Send</button> <button type="submit" class="btn btn-primary m-l-5">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
