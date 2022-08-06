@@ -145,6 +145,5 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     });
 
   }
-  
 
 }

@@ -1,339 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-
-</head>
-
-<body>
-
-
-  <div class="container">
-    <div class="content">
-      <div class="first-row">
-        <div class="row">
-          <div class="icon-section col-md-2">
-            <a href="">
-              <img src="../../assets/img/task-box.png" style="height:50px ;" alt="">
-              <h5> Profile </h5>
-            </a>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/employees.png" alt="" style="height:50px ;">
-            <h5> Employees </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/vibe.webp" alt="" style="height:50px ;">
-            <h5> Vibe </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/attendance.png" alt="" style="height:50px ;">
-            <h5> Attendance </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/leave.png" alt="" style="height:50px ;">
-            <h5> Leave </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/hr-documents.jpg" style="height: 50px ;" alt="">
-            <h5> HR Documents </h5>
-          </div>
-        </div>
-      </div>
-      <div class="second-row">
-        <div class="row">
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/recruitment-icon.jpg" style="height:50px ;" alt="">
-            <h5> Recruitment </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/calender.webp" alt="" style="height:50px ;">
-            <h5> Calender</h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/performance-1.jpg" alt="" style="height:50px ;">
-            <h5> Performance </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/help-desk.png" alt="" style="height:50px ;">
-            <h5> Help Desk </h5>
-          </div>
-          <div class="icon-section col-md-2">
-            <img src="../../assets/img/org-view.jpg" alt="" style="height:50px ;">
-            <h5> Org View </h5>
-          </div>
-        </div>
-      </div>
-
-      <!-- modal -->
-
-      <!-- modal ends here -->
-    </div>
-  </div>
-
-
-
-
-
-
-</body>
-
-</html>
-
-
-
-
-<!-- <div class="page-wrapper" id="dashboard_wrapper">
+<div class="page-wrapper" id="dashboard_wrapper">
   <div class="content container-fluid">
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-lg-3">
-        <div class="dash-widget clearfix card-box">
-          <span class="dash-widget-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span>
-          <div class="dash-widget-info">
-            <h3>{{dash.projects}}</h3>
-            <span>Projects</span>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <a href="">
+          <img
+            src="../../assets/img/task-box.png"
+            style="height: 50px"
+            alt=""
+          />
+          <h5>Profile</h5>
+        </a>
       </div>
-      <div class="col-md-6 col-sm-6 col-lg-3">
-        <div class="dash-widget clearfix card-box">
-          <span class="dash-widget-icon"><i class="fa fa-usd" aria-hidden="true"></i></span>
-          <div class="dash-widget-info">
-            <h3>{{dash.clients}}</h3>
-            <span>Clients</span>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/employees.png" alt="" style="height: 50px" />
+        <h5>Employees</h5>
       </div>
-      <div class="col-md-6 col-sm-6 col-lg-3">
-        <div class="dash-widget clearfix card-box">
-          <span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-          <div class="dash-widget-info">
-            <h3>{{dash.tasks}}</h3>
-            <span>Tasks</span>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/vibe.webp" alt="" style="height: 50px" />
+        <h5>Vibe</h5>
       </div>
-      <div class="col-md-6 col-sm-6 col-lg-3">
-        <div class="dash-widget clearfix card-box">
-          <span class="dash-widget-icon"><i class="fa fa-user" aria-hidden="true"></i></span>
-          <div class="dash-widget-info">
-            <h3>{{dash.employees}}</h3>
-            <span>Employees</span>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img
+          src="../../assets/img/attendance.png"
+          alt=""
+          style="height: 50px"
+        />
+        <h5>Attendance</h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 outer-barchart text-center">
-        <div class="card-box" id="card_barchart">
-          <h4 class="card-title barchart-title">Total Revenue</h4>
-          <div id="bar-charts"></div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/leave.png" alt="" style="height: 50px" />
+        <h5>Leave</h5>
       </div>
-      <div class="col-md-6 text-center">
-        <div class="card-box">
-          <h4 class="card-title">Sales Overview</h4>
-          <div id="line-charts"></div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img
+          src="../../assets/img/hr-documents.jpg"
+          style="height: 50px"
+          alt=""
+        />
+        <h5>HR Documents</h5>
       </div>
-      <div class="col-md-6 text-center">
-        <div class="card-box">
-          <h4 class="card-title">Invoice Status</h4>
-          <div id="area-charts"></div>
-        </div>
+  
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img
+          src="../../assets/img/recruitment-icon.jpg"
+          style="height: 50px"
+          alt=""
+        />
+        <h5>Recruitment</h5>
       </div>
-      <div class="col-md-6 text-center">
-        <div class="card-box">
-          <h4 class="card-title">Overall Status</h4>
-          <div id="pie-charts"></div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/calender.webp" alt="" style="height: 50px" />
+        <h5>Calender</h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-12" id="dash_invoice">
-        <div class="panel panel-table">
-          <div class="panel-heading">
-            <h3 class="panel-title">Invoices</h3>
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped custom-table m-b-0">
-                <thead>
-                  <tr>
-                    <th>Invoice ID</th>
-                    <th>Client</th>
-                    <th>Due Date</th>
-                    <th>Total</th>
-                    <th class="text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of invoices">
-                    <td><a href="javascript:">#INV-00{{item.invoiceID}}</a></td>
-                    <td>
-                      <h2><a href="javascript:">{{item.client}}</a></h2>
-                    </td>
-                    <td>{{item.dueDate.formatted}}</td>
-                    <td>${{item.total}}</td>
-                    <td class="text-center">
-                      <span [ngClass]="{'label-warning-border' : item.status == 'Partially Paid','label-success-border' : item.status == 'Paid','label-danger-border' : item.status == 'Unpaid'}"
-                        class="label">{{item.status}}</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <a routerLink="../accounts/invoices" class="text-primary">View all invoices</a>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img
+          src="../../assets/img/performance-1.jpg"
+          alt=""
+          style="height: 50px"
+        />
+        <h5>Performance</h5>
       </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="panel panel-table">
-          <div class="panel-heading">
-            <h3 class="panel-title">Payments</h3>
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped custom-table m-b-0">
-                <thead>
-                  <tr>
-                    <th>Invoice ID</th>
-                    <th>Client</th>
-                    <th>Payment Type</th>
-                    <th>Paid Date</th>
-                    <th>Paid Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of payments">
-                    <td><a href="javascript:">#INV-00{{item.paymentID}}</a></td>
-                    <td>
-                      <h2><a href="javascript:">{{item.client}}</a></h2>
-                    </td>
-                    <td>{{item.paymentType}}</td>
-                    <td>{{item.paidDate.formatted}}</td>
-                    <td>${{item.paidAmount}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <a routerLink="../accounts/payments" class="text-primary">View all payments</a>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/help-desk.png" alt="" style="height: 50px" />
+        <h5>Help Desk</h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <div class="panel panel-table">
-          <div class="panel-heading">
-            <h3 class="panel-title">Clients</h3>
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped custom-table m-b-0">
-                <thead>
-                  <tr>
-                    <th style="min-width:200px;">Name</th>
-                    <th>Email</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of clients">
-                    <td style="min-width:200px;">
-                      <a href="javascript:" class="avatar">{{item.firstName.split('')[0]}}</a>
-                      <h2><a href="javascript:">{{item.firstName}} {{item.lastName}} <span>{{item.designation}}</span></a></h2>
-                    </td>
-                    <td>{{item.email}}</td>
-                    <td class="text-center">
-                        <div class="dropdown action-label">
-                            <a class="btn btn-white btn-sm rounded dropdown-toggle" href="javascript:" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-dot-circle-o" [ngClass]="item.status == 'Active' ? 'text-success' : 'text-danger' "></i> {{item.status}} <i class="caret"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                              <li><a href="javascript:"><i class="fa fa-dot-circle-o text-success"></i> Active</a></li>
-                              <li><a href="javascript:"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a></li>
-                            </ul>
-                          </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="dropdown">
-                          <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                          <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:" title="Edit"><i class="fa fa-pencil m-r-5"></i> Edit</a></li>
-                            <li><a href="javascript:" title="Delete"><i class="fa fa-trash-o m-r-5"></i> Delete</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <a routerLink="/clients" class="text-primary">View all clients</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <div class="panel panel-table">
-          <div class="panel-heading">
-            <h3 class="panel-title">Recent Projects</h3>
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-striped custom-table m-b-0">
-                <thead>
-                  <tr>
-                    <th class="col-md-3">Project Name </th>
-                    <th class="col-md-3">Progress</th>
-                    <th class="text-right col-md-1">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of projects">
-                    <td>
-                      <h2><a href="javascript:">{{item.projectName}}</a></h2>
-                      <small class="block text-ellipsis">
-                        <span class="text-xs">1</span> <span class="text-muted">open tasks, </span>
-                        <span class="text-xs">9</span> <span class="text-muted">tasks completed</span>
-                      </small>
-                    </td>
-                    <td>
-                      <div class="progress progress-xs progress-striped">
-                        <div class="progress-bar bg-success" role="progressbar" tooltip="{{item.progress}}%"
-                          style.width="{{item.progress}}%"></div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="dropdown">
-                          <a href="javascript:;" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                          <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:;" title="Edit"><i class="fa fa-pencil m-r-5"></i> Edit</a></li>
-                            <li><a href="javascript:;" title="Delete"><i class="fa fa-trash-o m-r-5"></i> Delete</a></li>
-                          </ul>
-                        </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <a routerLink="/projects" class="text-primary">View all projects</a>
-          </div>
-        </div>
+      <div class="col-md-2 col-sm-6 col-xs-6 p-3 text-center">
+        <img src="../../assets/img/org-view.jpg" alt="" style="height: 50px" />
+        <h5>Org View</h5>
       </div>
     </div>
   </div>
-
-</div> -->
+</div>
