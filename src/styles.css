@@ -1060,7 +1060,7 @@ table.dataTable {
 
 .page-wrapper {
 	left: 0;
-	margin-left: 230px;
+	/* margin-left: 230px; */
 	padding-top: 60px;
 	position: relative;
 	transition: all 0.2s ease-in-out;
