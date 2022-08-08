@@ -105,6 +105,11 @@ import { JobsApplicationComponent } from './career/jobs-application/jobs-applica
 import { ManagedJobsComponent } from './jobs/managed-jobs/managed-jobs.component';
 import { AppliedJobsComponent } from './jobs/applied-jobs/applied-jobs.component';
 import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
 
 enableProdMode();
 
@@ -319,7 +324,11 @@ const routes: Routes = [
     FullCalendarModule,
     MorrisJsModule,
     TooltipModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AngularFireModule.initializeApp(environment.config),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule // storage
   ],
   providers: [
     EventService,
